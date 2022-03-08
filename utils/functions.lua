@@ -191,13 +191,3 @@ function _G.jabarg()
         print(string.format("TRACE : end cursor [row, col = %d, %d]", target_row, target_col))
     end
 end
-
-function _G.push_config()
-    io.popen("(cd ~/.config/nvim && git add -A && git commit -m \"auto-commit\" && git push)")
-    print("Pushed config to remote")
-end
-
-function _G.pull_config()
-    io.popen("(cd ~/.config/nvim && git pull)")
-    print("Pulled config from remote, restart nvim")
-end

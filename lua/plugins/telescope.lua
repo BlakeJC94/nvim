@@ -18,8 +18,8 @@ MAPPINGS = {
         ['z='] = {map=[[v:count ? v:count . 'z=' : ':Telescope spell_suggest<CR>']], opts={expr=true}},
     },
     i = {
-        -- C-r : See registers with telescope
-        ['<C-r>'] = "<cmd>Telescope registers<CR>",
+        -- C-r C-r : See registers with telescope
+        ['<C-r><C-r>'] = "<cmd>Telescope registers<CR>",
     },
 }
 

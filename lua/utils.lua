@@ -153,18 +153,6 @@ M.set_mapping_group = function(mapping_group)
     end
 end
 
-M.set_arrow_mappings = function()
-    require('utils').set_mapping_group(ARROW_MAPS)
-end
-
-M.set_packer_mappings = function()
-    require('utils').set_mapping_group(PACKER_MAPS)
-end
-
-M.set_insert_undo_mappings = function()
-    require('utils').set_mapping_group(INSERT_UNDO_MAPS)
-end
-
 M.my_fold_text = function()
     local line = vim.fn.getline(vim.v.foldstart)
 

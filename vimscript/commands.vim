@@ -17,6 +17,17 @@ command! -nargs=? Note lua NewNote(<f-args>)
 command! PushConfig exec "!(cd ~/.config/nvim && git add . && git commit -m 'sync' && git push)"
 command! PullConfig exec "!(cd ~/.config/nvim && git pull)"
 
+" vim tips
+function! VimTip()
+    if !exists('g:vimtip')
+        let g:vimtip = system('fortune ~/.config/nvim/extras/vim-tips')
+    echo g:vimtip
+    else
+        put =g:vimtip
+    endif
+endfun
+command! VimTip call VimTip()
+
 " Debug syntax highlights
 function! ShowSyntaxGroup()
     let l:s = synID(line('.'), col('.'), 1)

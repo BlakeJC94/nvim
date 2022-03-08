@@ -70,7 +70,6 @@ function _G.NewNote(in_str)
     vim.cmd("normal! G$")
 end
 
-
 function _G.tabout()
     local closers = {")", "]", "}", ">", "'", '"', "`", ","}
     local line = vim.api.nvim_get_current_line()

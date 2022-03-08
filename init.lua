@@ -216,9 +216,9 @@ end
 
 -- DEFINE COMMANDS (VIMSCRIPT AND LUA)
 vim.cmd [[
-    luafile ~/.config/nvim/utils/functions.lua
-    source  ~/.config/nvim/utils/commands.vim
-    source  ~/.config/nvim/utils/autogroups.vim
+    luafile ~/.config/nvim/lua/functions.lua
+    source  ~/.config/nvim/vimscript/commands.vim
+    source  ~/.config/nvim/vimscript/autogroups.vim
 ]]
 
 -- DEFINE MAPPINGS

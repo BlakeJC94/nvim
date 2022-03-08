@@ -20,7 +20,7 @@ augroup style
     autocmd TermEnter * setl nornu nonu
     autocmd TermLeave * setl rnu nu
     " echo a vimtip when opening vim
-    autocmd VimEnter * echo system('fortune ~/.dots/extras/fortune/vim-tips')
+    autocmd VimEnter * VimTip
     " highlight yanked regions
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 700})
 augroup END

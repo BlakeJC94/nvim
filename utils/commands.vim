@@ -13,6 +13,10 @@ command! ToggleLL exec empty(filter(getwininfo(), 'v:val.loclist')) ? "lopen" : 
 command! Notes split ~/Dropbox/Journals | silent lcd %:p:h | echo 'Opening notes: ' . expand('%')
 command! -nargs=? Note lua NewNote(<f-args>)
 
+" Push/pull changes
+command! PushConfig exec "!(cd ~/.config/nvim && git add . && git commit -m 'sync' && git push)"
+command! PullConfig exec "!(cd ~/.config/nvim && git pull)"
+
 " Debug syntax highlights
 function! ShowSyntaxGroup()
     let l:s = synID(line('.'), col('.'), 1)

@@ -89,4 +89,7 @@ M['monaqa/dial.nvim'] = {
     end,
 }
 
+-- Highlighting for kitty config
+M["fladson/vim-kitty"] = {}
+
 return M

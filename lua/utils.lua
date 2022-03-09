@@ -4,7 +4,7 @@ DISABLED_BUILT_INS = {
     'netrw',
     'netrwPlugin',
     'gzip',
-    'man',
+    -- 'man',
     'shada_plugin',
     'tarPlugin',
     'tar',

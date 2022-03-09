@@ -101,6 +101,18 @@ MAPS = {
         -- Unmap q (and map Q to q to stop polluting registers accidentally!)
         ['q'] = '',
         ['Q'] = 'gq',
+        -- Navigate git changes in file
+        [']g'] = {map=[[&diff ? ']g' : '<cmd>Gitsigns next_hunk<CR>']], opts={expr=true}},
+        ['[g'] = {map=[[&diff ? '[g' : '<cmd>Gitsigns prev_hunk<CR>']], opts={expr=true}},
+        -- Navigate diagnostics
+        [']e'] = ':lua vim.diagnostic.goto_next()<CR>',
+        ['[e'] = ':lua vim.diagnostic.goto_prev()<CR>',
+        -- LSP bindings
+        ['gd'] = ':LspDefinition<CR>',
+        ['gD'] = ':LspDeclaration<CR>',
+        ['gI'] = ':lua vim.lsp.buf.implementation()<CR>',
+        ['gr'] = ':LspReferences<CR>',
+        ['gy'] = ':LspTypeDefinition<CR>',
         -- <C-z> => Toggle terminal
         ['<C-z>'] = "<cmd>lua require('FTerm').toggle()<CR>",
         -- Leader maps
@@ -121,6 +133,33 @@ MAPS = {
         ['<Leader>Z'] = ":ZenMode<CR>",                -- Toggle ZenMode
         ['<Leader>A'] = ":Neogen<CR>",                 -- Generate docs
         ['<Leader>u'] = ":UndotreeToggle<CR>",         -- Toggle undotree
+        -- Packer leader maps
+        ['<Leader>pp'] = ':PackerSync<CR>',
+        ['<Leader>pi'] = ':PackerInstall<CR>',
+        ['<Leader>pu'] = ':PackerUpdate<CR>',
+        ['<Leader>pc'] = ':PackerCompile<CR>',
+        ['<Leader>pr'] = ':PackerClean<CR>',
+        ['<Leader>ps'] = ':PackerStatus<CR>',
+        -- Git leader maps
+        ['<Leader>G']  = ':Git<CR>',
+        ['<Leader>gg'] = ':Gitsigns setqflist<CR>',
+        ['<Leader>gs'] = ':Gitsigns stage_hunk<CR>',
+        ['<Leader>gu'] = ':Gitsigns undo_stage_hunk<CR>',
+        ['<Leader>gr'] = ':Gitsigns reset_hunk<CR>',
+        ['<Leader>gR'] = ':Gitsigns reset_buffer<CR>',
+        ['<Leader>gp'] = ':Gitsigns preview_hunk<CR>',
+        ['<Leader>gb'] = ':lua require("gitsigns").blame_line({full=true})<CR>',
+        ['<Leader>gS'] = ':Gitsigns stage_buffer<CR>',
+        ['<Leader>gU'] = ':Gitsigns reset_buffer_index<CR>',
+        ['<Leader>gd'] = ':vert Gdiffsplit<CR>',
+        ['<Leader>gc'] = ':GV<CR>',
+        -- LSP Leader bindings
+        ['<Leader>e'] = ':lua vim.diagnostic.open_float()<CR>',  -- Show line diagnostics
+        ['<Leader>E'] = ':lua vim.diagnostic.setloclist()<CR>',  -- Show buffer diagnostics
+        ['<Leader>='] = ':lua vim.lsp.buf.formatting()<CR>',     -- Format buffer
+        ['<Leader>r'] = ':LspRename<CR>',                        -- Rename current symbol
+        ['<Leader>k'] = ':LspSignatureHelp<CR>',                 -- Show signature help
+        ['<Leader>a'] = ':LspCodeAction<CR>',                    -- Do code action
     },
     n = {
         -- Make Y behave like D and C
@@ -145,6 +184,8 @@ MAPS = {
         -- Delete selected word (forward/backwards), . to repeat
         ['d*'] = "/\\<<C-r>=expand('<cword>')<CR>\\>\\C<CR>``dgn",
         ['d#'] = "?\\<<C-r>=expand('<cword>')<CR>\\>\\C<CR>``dgN",
+        -- Make K use lsp.hover, call twice to jump to hoverdoc
+        ['K'] = ':lua vim.lsp.buf.hover()<CR>',
     },
     v = {
         -- Maintain Visual Mode after >/</= actions
@@ -166,6 +207,8 @@ MAPS = {
         ['<C-z>'] = "<Esc>:lua require('FTerm').toggle()<CR>",
         -- C-s : Quickly guess correct spelling errors (undoable)
         -- ['<C-s>'] = '<C-g>u<Esc>[s1z=`]a<c-g>u', -- Currently borked by spellsitter
+        -- Make <C-k> use lsp.hover, call twice to jump to hoverdoc
+        ['<C-k>'] = '<C-o>:lua vim.lsp.buf.hover()<CR>',
     },
     t = {
         -- <Esc><Esc> => (terminal) go to normal mode
@@ -225,7 +268,6 @@ vim.cmd [[
 vim.g.mapleader = " "
 local mapping_groups = {
     MAPS,
-    utils.packer_maps,
     utils.arrow_maps,
     utils.insert_undo_maps,
 }

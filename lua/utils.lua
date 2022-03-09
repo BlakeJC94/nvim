@@ -4,7 +4,7 @@ DISABLED_BUILT_INS = {
     'netrw',
     'netrwPlugin',
     'gzip',
-    -- 'man',
+    'man',
     'shada_plugin',
     'tarPlugin',
     'tar',
@@ -78,17 +78,6 @@ M.arrow_maps = {
             opts = {expr=true, silent=false},
         },
     },
-}
-
-M.packer_maps = {
-    [''] = {
-        ['<Leader>pp'] = ':PackerSync<CR>',
-        ['<Leader>pi'] = ':PackerInstall<CR>',
-        ['<Leader>pu'] = ':PackerUpdate<CR>',
-        ['<Leader>pc'] = ':PackerCompile<CR>',
-        ['<Leader>pr'] = ':PackerClean<CR>',
-        ['<Leader>ps'] = ':PackerStatus<CR>',
-    }
 }
 
 M.insert_undo_maps = {

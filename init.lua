@@ -1,9 +1,6 @@
 ----- BLAKEJC94S NEOVIM INIT.LUA ------------------------------------------------------------------
 
 PLUGINS = {
-    -- BASE PLUGINS
-    __editor__    = true,
-    __interface__ = true,
     -- EXTENSIONS
     cmp        = true,
     git        = true,
@@ -12,6 +9,9 @@ PLUGINS = {
     lualine    = true,
     telescope  = true,
     treesitter = true,
+    -- BASE PLUGINS
+    __editor__    = true,
+    __interface__ = true,
 }
 
 OPTIONS = {

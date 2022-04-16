@@ -14,13 +14,14 @@ command! Notes split ~/Dropbox/Journals | silent lcd %:p:h | echo 'Opening notes
 command! -nargs=? Note lua NewNote(<f-args>)
 
 " Push/pull changes to config
-command! PushConfig exec "!(cd ~/.config/nvim && git add . && git commit -m 'sync' && git push)"
-command! PullConfig exec "!(cd ~/.config/nvim && git pull)"
+command! ConfigPush exec "!(cd ~/.config/nvim && git add . && git commit -m 'sync' && git push)"
+command! ConfigPull exec "!(cd ~/.config/nvim && git pull)"
 
 " vim tips
 function! VimTip()
     if !exists('g:vimtip')
         let g:vimtip = system('fortune ~/.config/nvim/extras/vim-tips')
+        let @v = g:vimtip
     echo g:vimtip
     else
         put =g:vimtip

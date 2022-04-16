@@ -1,10 +1,6 @@
-TODO add vimtips to this repo
 TODO make function for getting vimtip
-TODO put vimtip in register
 TODO investigate fugitive mappings
-TODO split into separate nvim repo
 TODO write a readme for nvim repo
-TODO write an upgit command for syncing changes to github after splitting into nvim repo
 TODO replace Lir with telescope file explorer
 TODO add git worktrees plugin
 

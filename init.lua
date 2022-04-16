@@ -68,6 +68,7 @@ OPTIONS = {
         relativenumber = true,  -- Show rel/abs line numbers
         signcolumn     = 'no',  -- Set sign column
         -- BOTTOM MARGIN
+        laststatus = 3,     -- Show global status line
         showcmd    = true,  -- Show command in bottom right
         cmdheight  = 2,     -- Set height of command window
         wildignore = {'*.pyc', '**/.git/*', '**/data/*'},

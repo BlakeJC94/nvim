@@ -75,7 +75,8 @@ M['nvim-telescope/telescope.nvim'] = {
 
         require('utils').set_mapping_group({
             [''] = {
-                ['<Leader>tt'] = ":Telescope<CR>",                            -- Find Telescopes
+                ['<Leader>tT'] = ":Telescope<CR>",                            -- Find Telescopes
+                ['<Leader>tt'] = ":Telescope resume<CR>",                     -- Open last telescope
                 ['<Leader>tb'] = ":Telescope buffers<CR>",                    -- Switch between buffers
                 ['<Leader>tr'] = ":Telescope registers<CR>",                  -- Switch between buffers
                 ['<Leader>to'] = ":Telescope oldfiles<CR>",                   -- Recently changed files

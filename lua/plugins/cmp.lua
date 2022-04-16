@@ -9,9 +9,9 @@ M["hrsh7th/nvim-cmp"] = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "kdheepak/cmp-latex-symbols",
-        "hrsh7th/cmp-copilot",
         "hrsh7th/cmp-nvim-lsp-signature-help",
         "hrsh7th/cmp-cmdline",
+        "zbirenbaum/copilot-cmp",
     },
     config = function()
         local cmp = require('cmp')
@@ -45,14 +45,7 @@ M["hrsh7th/nvim-cmp"] = {
                     elseif has_words_before() then
                         cmp.complete()
                     else
-                        -- local copilot_keys = vim.fn["copilot#Accept"]()
-                        -- vim.cmd('echo '.. copilot_keys)
-                        if vim.fn["copilot#Accept"]() ~= "" then
-                            -- vim.api.nvim_feedkeys(copilot_keys, "i", true)
-                            vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)), 'n', true)
-                        else
-                            fallback()
-                        end
+                        fallback()
                     end
                 end, { "i", "s", "c" }),
                 ["<S-Tab>"] = cmp.mapping(function(fallback)
@@ -63,30 +56,29 @@ M["hrsh7th/nvim-cmp"] = {
                     end
                 end, { "i", "s", "c" }),
             },
-            sources = cmp.config.sources({
+            sources = {
+                {name = 'copilot'},
                 {name = 'nvim_lsp_signature_help'},
                 {name = 'nvim_lsp'},
                 {name = 'path'},
-                {name = 'latex_symbols'},
-                {name = 'copilot'},
-                {name = 'path'},
-            },{
                 {name = 'buffer'},
-            }),
-            -- experimental = {
-            --     ghost_text = false,
-            -- }
+                {name = 'latex_symbols'},
+            },
+            experimental = {
+                -- native_menu = false,
+                ghost_text = true,
+            },
         })
 
-        require'cmp'.setup.cmdline(':', {
+        cmp.setup.cmdline(':', {
             sources = {
-            { name = 'cmdline' }
-            }
+                { name = 'cmdline' },
+            },
         })
-        require'cmp'.setup.cmdline('/', {
+        cmp.setup.cmdline('/', {
             sources = {
-            { name = 'buffer' }
-            }
+                { name = 'buffer' },
+            },
         })
 
         -- Set up autopairs
@@ -95,18 +87,32 @@ M["hrsh7th/nvim-cmp"] = {
     end
 }
 
--- Github copilot
-M['github/copilot.vim'] = {
-    commit = 'c013148',
-    config = function()
-        vim.g.copilot_assume_mapped = true
-        vim.g.copilot_no_tab_map = true
-        vim.g.copilot_tab_fallback = ""
-        -- vim.cmd[[
-        --     let g:copilot_no_tab_map = v:true
-        --     imap <expr> <Plug>(vimrc:copilot-dummy-map) copilot#Accept("\<Tab>")
-        -- ]]
-    end,
+-- -- Github copilot
+-- M['github/copilot.vim'] = {
+--     commit = 'c013148',
+--     config = function()
+--         vim.g.copilot_assume_mapped = true
+--         vim.g.copilot_no_tab_map = true
+--         vim.g.copilot_tab_fallback = ""
+--     end,
+-- }
+-- -- CMP MAPPING FOR GETTING COPILOT WORKING
+--    ["<Tab>"] = cmp.mapping(function(fallback)
+--     if cmp.visible() then
+--         cmp.select_next_item()
+--     elseif has_words_before() then
+--         cmp.complete()
+--     else
+--         if vim.fn["copilot#Accept"]() ~= "" then
+--             vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)), 'n', true)
+--         else
+--             fallback()
+--         end
+--     end
+-- end, { "i", "s", "c" }),
+
+M["zbirenbaum/copilot.lua"] = {
+    config = function() require("copilot").setup() end,
 }
 
 return M

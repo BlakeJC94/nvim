@@ -117,7 +117,7 @@ MAPS = {
         -- <C-z> => Toggle terminal
         ['<C-z>'] = "<cmd>lua require('FTerm').toggle()<CR>",
         -- Leader maps
-        ['<Leader><CR>']     = ":Lir<CR>",                   -- File explorer TODO telescope?
+        ['<Leader><CR>']     = ":Lir<CR>",                   -- File explorer
         ['<Leader><BS>']     = ":Telescope find_files<CR>",  -- File finder
         ['<Leader><Tab>']    = "<C-^>",                      -- Last file
         ['<Leader><Esc>']    = ":q<CR>",                     -- Quit

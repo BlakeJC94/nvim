@@ -1,8 +1,5 @@
-TODO make function for getting vimtip
 TODO investigate fugitive mappings
 TODO write a readme for nvim repo
-TODO replace Lir with telescope file explorer
-TODO add git worktrees plugin
 
 # RETIRED AUTOGROUPS
 ```

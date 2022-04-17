@@ -169,10 +169,16 @@ M['norcalli/nvim-colorizer.lua'] = {
     config = function() require("colorizer").setup({'*'}, {names=false}) end
 }
 
+-- Subtle highlighting of instances of word under cursor
 M["RRethy/vim-illuminate"] = {
     config = function()
         vim.g.Illuminate_ftblacklist = {'lir'}
     end
+}
+
+-- Dim inactive splits
+M['sunjon/Shade.nvim'] = {
+    config = function() require'shade'.setup() end,
 }
 
 return M

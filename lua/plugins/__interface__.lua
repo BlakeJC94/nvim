@@ -18,6 +18,7 @@ M["ellisonleao/gruvbox.nvim"] = {
         vim.g.gruvbox_contrast_dark     = 'hard'
         vim.g.gruvbox_italicize_strings = 1
         vim.cmd [[colorscheme gruvbox]]
+        vim.cmd("highlight IndentBlanklineContextChar guifg=#a89984 gui=nocombine")
     end,
 }
 
@@ -141,7 +142,6 @@ M["lukas-reineke/indent-blankline.nvim"] = {
             },
             buftype_exclude = {"terminal",},
         })
-        vim.cmd("highlight IndentBlanklineContextChar guifg=#a89984 gui=nocombine")
     end
 }
 

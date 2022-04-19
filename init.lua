@@ -109,11 +109,11 @@ MAPS = {
         [']e'] = ':lua vim.diagnostic.goto_next()<CR>',
         ['[e'] = ':lua vim.diagnostic.goto_prev()<CR>',
         -- LSP bindings
-        ['gd'] = ':LspDefinition<CR>',
-        ['gD'] = ':LspDeclaration<CR>',
-        ['gI'] = ':lua vim.lsp.buf.implementation()<CR>',
-        ['gr'] = ':LspReferences<CR>',
-        ['gy'] = ':LspTypeDefinition<CR>',
+        ['gd'] = ':Lsp definition<CR>',
+        ['gD'] = ':Lsp declaration<CR>',
+        ['gI'] = ':Lsp implementation<CR>',
+        ['gr'] = ':Lsp references<CR>',
+        ['gy'] = ':Lsp typedefinition<CR>',
         -- <C-z> => Toggle terminal
         ['<C-z>'] = "<cmd>lua require('FTerm').toggle()<CR>",
         -- Leader maps
@@ -157,10 +157,10 @@ MAPS = {
         -- LSP Leader bindings
         ['<Leader>e'] = ':lua vim.diagnostic.open_float()<CR>',  -- Show line diagnostics
         ['<Leader>E'] = ':lua vim.diagnostic.setloclist()<CR>',  -- Show buffer diagnostics
-        ['<Leader>='] = ':lua vim.lsp.buf.formatting()<CR>',     -- Format buffer
-        ['<Leader>r'] = ':LspRename<CR>',                        -- Rename current symbol
-        ['<Leader>k'] = ':LspSignatureHelp<CR>',                 -- Show signature help
-        ['<Leader>a'] = ':LspCodeAction<CR>',                    -- Do code action
+        ['<Leader>='] = ':Lsp format<CR>',     -- Format buffer
+        ['<Leader>r'] = ':Lsp rename<CR>',                        -- Rename current symbol
+        ['<Leader>k'] = ':Lsp signature<CR>',                 -- Show signature help
+        ['<Leader>a'] = ':Lsp codeaction<CR>',                    -- Do code action
     },
     n = {
         -- Make Y behave like D and C
@@ -186,7 +186,7 @@ MAPS = {
         ['d*'] = "/\\<<C-r>=expand('<cword>')<CR>\\>\\C<CR>``dgn",
         ['d#'] = "?\\<<C-r>=expand('<cword>')<CR>\\>\\C<CR>``dgN",
         -- Make K use lsp.hover, call twice to jump to hoverdoc
-        ['K'] = ':lua vim.lsp.buf.hover()<CR>',
+        ['K'] = ':Lsp hover<CR>',
     },
     v = {
         -- Maintain Visual Mode after >/</= actions

@@ -6,12 +6,30 @@ M['neovim/nvim-lspconfig'] = {  -- LSP Engine configuration
         "hrsh7th/cmp-nvim-lsp",
         "williamboman/nvim-lsp-installer",
         "RRethy/vim-illuminate",
-        'nanotee/nvim-lsp-basics',
+        "ii14/lsp-command",
     },
     config = function()
         local lspconfig = require('lspconfig')
         local cmp_nvim_lsp = require('cmp_nvim_lsp')
-        local basics = require('lsp_basics')
+
+        -- Create commands
+        -- vim.api.nvim_create_user_command("LspReferences", vim.lsp.buf.references, {})
+        -- vim.api.nvim_create_user_command("LspSignature", vim.lsp.buf.signature_help, {})
+        -- vim.api.nvim_create_user_command("LspCodeAction", vim.lsp.buf.code_action, {})
+        -- vim.api.nvim_create_user_command("LspFormat", vim.lsp.buf.formatting, {})
+        -- vim.api.nvim_create_user_command("LspLineDiagnostics", vim.lsp.diagnostic.show_line_diagnostics, {})
+        -- vim.api.nvim_create_user_command("LspIncomingCalls", vim.lsp.buf.incoming_calls, {})
+        -- vim.api.nvim_create_user_command("LspOutgoingCalls", vim.lsp.buf.outgoing_calls, {})
+        -- vim.api.nvim_create_user_command("LspListWorkspaceFolders", "lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))", {})
+        -- vim.api.nvim_create_user_command("LspDocumentSymbol", vim.lsp.buf.document_symbol, {})
+        -- vim.api.nvim_create_user_command("LspDefinition", vim.lsp.buf.definition, {})
+        -- vim.api.nvim_create_user_command("LspTypeDefinition", vim.lsp.buf.type_definition, {})
+        -- vim.api.nvim_create_user_command("LspDeclaration", vim.lsp.buf.declaration, {})
+        -- vim.api.nvim_create_user_command("LspImplementation", vim.lsp.buf.implementation, {})
+        -- vim.api.nvim_create_user_command("LspRename", vim.lsp.buf.rename, {})
+        -- vim.api.nvim_create_user_command("LspWorkspaceSymbol", vim.lsp.buf.workspace_symbol, {nargs='?'})
+        -- vim.api.nvim_create_user_command("LspAddWorkspaceFolder", vim.lsp.buf.add_workspace_folder, {nargs='?', complete='dir'})
+        -- vim.api.nvim_create_user_command("LspRemoveWorkspaceFolder", vim.lsp.buf.remove_workspace_folder, {nargs='?', complete='dir'})
 
         -- Configure diagnostics
         vim.diagnostic.config({
@@ -31,10 +49,6 @@ M['neovim/nvim-lspconfig'] = {  -- LSP Engine configuration
         local on_attach = function(client)
             -- Enable completion triggered by <c-x><c-o>
             vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-            -- Make basic LSP commands
-            basics.make_lsp_commands(client, bufnr)
-            -- basics.make_lsp_mappings(client, bufnr)
 
             -- Enable LSP-aware word highlighting
             -- require 'illuminate'.on_attach(client)

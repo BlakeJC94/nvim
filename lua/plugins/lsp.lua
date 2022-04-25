@@ -129,11 +129,6 @@ M['neovim/nvim-lspconfig'] = {  -- LSP Engine configuration
     end
 }
 
--- Loading status for LSP
-M['j-hui/fidget.nvim'] = {
-    config = function() require('fidget').setup({}) end,
-}
-
 -- Extra sources for LSP
 M['jose-elias-alvarez/null-ls.nvim'] = {
     config = function()
@@ -147,37 +142,49 @@ M['jose-elias-alvarez/null-ls.nvim'] = {
     end,
 }
 
-M['kosayoda/nvim-lightbulb'] = {
-    config = function()
-        require'nvim-lightbulb'.update_lightbulb {
-            sign = {
-                enabled = false,
-                -- Priority of the gutter sign
-                priority = 10,
-            },
-            float = {
-                enabled = false,
-                -- Text to show in the popup float
-                text = "💡",
-            },
-            virtual_text = {
-                enabled = true,
-                -- Text to show at virtual text
-                text = "💡",
-                -- highlight mode to use for virtual text (replace, combine, blend), see :help nvim_buf_set_extmark() for reference
-                hl_mode = "replace",
-            },
-            status_text = {
-                enabled = false,
-                -- Text to provide when code actions are available
-                text = "💡",
-                -- Text to provide when no actions are available
-                text_unavailable = ""
-            }
-        }
-        vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
-    end
+-- Loading status for LSP
+M['j-hui/fidget.nvim'] = {
+    config = function() require('fidget').setup({}) end,
 }
+
+-- display diagnostic status in top right
+M['Mofiqul/trld.nvim'] = {
+    config = function()
+        require('trld').setup {}
+    end,
+}
+
+-- M['kosayoda/nvim-lightbulb'] = {
+--     config = function()
+--         require'nvim-lightbulb'.update_lightbulb {
+--             sign = {
+--                 enabled = false,
+--                 -- Priority of the gutter sign
+--                 priority = 10,
+--             },
+--             float = {
+--                 enabled = false,
+--                 -- Text to show in the popup float
+--                 text = "💡",
+--             },
+--             virtual_text = {
+--                 enabled = true,
+--                 -- Text to show at virtual text
+--                 text = "💡",
+--                 -- highlight mode to use for virtual text (replace, combine, blend), see :help nvim_buf_set_extmark() for reference
+--                 hl_mode = "replace",
+--             },
+--             status_text = {
+--                 enabled = false,
+--                 -- Text to provide when code actions are available
+--                 text = "💡",
+--                 -- Text to provide when no actions are available
+--                 text_unavailable = ""
+--             }
+--         }
+--         vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+--     end
+-- }
 
 -- M["ray-x/lsp_signature.nvim"] = {
 --     config = function()

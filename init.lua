@@ -133,7 +133,7 @@ MAPS = {
         ['<Leader>z'] = ":Twilight<CR>",               -- Toggle FocusMode
         ['<Leader>Z'] = ":ZenMode<CR>",                -- Toggle ZenMode
         ['<Leader>A'] = ":Neogen<CR>",                 -- Generate docs
-        ['<Leader>u'] = ":UndotreeToggle<CR>",         -- Toggle undotree
+        -- ['<Leader>u'] = ":UndotreeToggle<CR>",         -- Toggle undotree
         -- Packer leader maps
         ['<Leader>pp'] = ':PackerSync<CR>',
         ['<Leader>pi'] = ':PackerInstall<CR>',
@@ -153,14 +153,13 @@ MAPS = {
         ['<Leader>gS'] = ':Gitsigns stage_buffer<CR>',
         ['<Leader>gU'] = ':Gitsigns reset_buffer_index<CR>',
         ['<Leader>gd'] = ':vert Gdiffsplit<CR>',
-        ['<Leader>gc'] = ':GV<CR>',
         -- LSP Leader bindings
         ['<Leader>e'] = ':lua vim.diagnostic.open_float()<CR>',  -- Show line diagnostics
         ['<Leader>E'] = ':lua vim.diagnostic.setloclist()<CR>',  -- Show buffer diagnostics
-        ['<Leader>='] = ':Lsp format<CR>',     -- Format buffer
-        ['<Leader>r'] = ':Lsp rename<CR>',                        -- Rename current symbol
-        ['<Leader>k'] = ':Lsp signature<CR>',                 -- Show signature help
-        ['<Leader>a'] = ':Lsp codeaction<CR>',                    -- Do code action
+        ['<Leader>='] = ':Lsp format<CR>',                       -- Format buffer
+        ['<Leader>r'] = ':Lsp rename<CR>',                       -- Rename current symbol
+        ['<Leader>k'] = ':Lsp signature<CR>',                    -- Show signature help
+        ['<Leader>a'] = ':Lsp codeaction<CR>',                   -- Do code action
     },
     n = {
         -- Make Y behave like D and C

@@ -27,6 +27,6 @@ M['tpope/vim-fugitive'] = {
 
 -- :GV => Better git log
 -- TODO consider if this is still needed
-M['junegunn/gv.vim'] = {}
+-- M['junegunn/gv.vim'] = {}
 
 return M

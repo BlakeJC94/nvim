@@ -35,7 +35,7 @@ M['jpalardy/vim-slime'] = {
 }
 
 -- Toggle undotree
-M['mbbill/undotree'] = {}
+-- M['mbbill/undotree'] = {}
 
 -- :ZenMode => Toggle Focus Mode (:Twilight => Toggle Focus highlights)
 M["folke/zen-mode.nvim"] = {
@@ -180,5 +180,8 @@ M["RRethy/vim-illuminate"] = {
 M['sunjon/Shade.nvim'] = {
     config = function() require'shade'.setup() end,
 }
+
+-- Highlighting for kitty config
+M["fladson/vim-kitty"] = {}
 
 return M

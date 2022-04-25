@@ -26,7 +26,7 @@ M['tpope/vim-eunuch'] = {}
 M['tpope/vim-rsi'] = {}
 
 -- :DB [url] {cmd} => Interactive database console
-M['tpope/vim-dadbod'] = {}
+-- M['tpope/vim-dadbod'] = {}
 
 -- iv/av => Text objects for substrings in snake/camel/kebab case
 M['Julian/vim-textobj-variable-segment'] = {
@@ -88,8 +88,5 @@ M['monaqa/dial.nvim'] = {
         ]]
     end,
 }
-
--- Highlighting for kitty config
-M["fladson/vim-kitty"] = {}
 
 return M

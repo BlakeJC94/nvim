@@ -177,9 +177,9 @@ M["RRethy/vim-illuminate"] = {
 }
 
 -- Dim inactive splits
-M['sunjon/Shade.nvim'] = {
-    config = function() require'shade'.setup() end,
-}
+-- M['sunjon/Shade.nvim'] = {
+--     config = function() require'shade'.setup() end,
+-- }
 
 -- Highlighting for kitty config
 M["fladson/vim-kitty"] = {}

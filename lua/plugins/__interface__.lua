@@ -51,38 +51,38 @@ M["folke/zen-mode.nvim"] = {
 }
 
 -- Firefox injection
-M['glacambre/firenvim'] = {
-    run = function() vim.fn['firenvim#install'](0) end,
-    config = function()
-        -- set specific filetypes for websites
-        vim.cmd [[ au BufEnter github.com_*.txt set filetype=markdown ]]
+-- M['glacambre/firenvim'] = {
+--     run = function() vim.fn['firenvim#install'](0) end,
+--     config = function()
+--         -- set specific filetypes for websites
+--         vim.cmd [[ au BufEnter github.com_*.txt set filetype=markdown ]]
 
-        vim.g.firenvim_config = {
-            globalSettings = {
-                alt = 'all',
-            },
-            localSettings = {
-                ['.*'] = {
-                    cmdline= 'neovim',
-                    content= 'text',
-                    priority= 0,
-                    selector= 'textarea',
-                    takeover= 'never', -- disable until called with firefox hotkey <C-e>
-                }
-            },
-        }
-        vim.cmd [[
-            if exists('g:started_by_firenvim')
-                set wrap linebreak colorcolumn=0 breakindent
-                "autocmd! TextChanged * ++nested write
-                "autocmd! TextChangedI * ++nested write
-                autocmd! InsertLeave,TextChanged * write
-                echo 'TRACE'
-                "hi Normal guibg='#1d2021'
-            endif
-        ]]
-    end
-}
+--         vim.g.firenvim_config = {
+--             globalSettings = {
+--                 alt = 'all',
+--             },
+--             localSettings = {
+--                 ['.*'] = {
+--                     cmdline= 'neovim',
+--                     content= 'text',
+--                     priority= 0,
+--                     selector= 'textarea',
+--                     takeover= 'never', -- disable until called with firefox hotkey <C-e>
+--                 }
+--             },
+--         }
+--         vim.cmd [[
+--             if exists('g:started_by_firenvim')
+--                 set wrap linebreak colorcolumn=0 breakindent
+--                 "autocmd! TextChanged * ++nested write
+--                 "autocmd! TextChangedI * ++nested write
+--                 autocmd! InsertLeave,TextChanged * write
+--                 echo 'TRACE'
+--                 "hi Normal guibg='#1d2021'
+--             endif
+--         ]]
+--     end
+-- }
 
 -- Better quickfix list format
 M['https://gitlab.com/yorickpeterse/nvim-pqf'] = {
@@ -103,10 +103,10 @@ M['https://gitlab.com/yorickpeterse/nvim-pqf'] = {
 M['alec-gibson/nvim-tetris'] = {}
 
 -- Highlight lines during selection in command mode
-M["winston0410/range-highlight.nvim"] = {
-    config = function() require('range-highlight').setup({}) end,
-    requires = {'winston0410/cmd-parser.nvim'}
-}
+-- M["winston0410/range-highlight.nvim"] = {
+--     config = function() require('range-highlight').setup({}) end,
+--     requires = {'winston0410/cmd-parser.nvim'}
+-- }
 
 -- Peek buffer lines during selection in command mode
 M['nacro90/numb.nvim'] = {

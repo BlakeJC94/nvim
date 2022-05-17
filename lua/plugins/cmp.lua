@@ -11,7 +11,7 @@ M["hrsh7th/nvim-cmp"] = {
         "kdheepak/cmp-latex-symbols",
         "hrsh7th/cmp-nvim-lsp-signature-help",
         "hrsh7th/cmp-cmdline",
-        "zbirenbaum/copilot-cmp",
+        -- "zbirenbaum/copilot-cmp",
     },
     config = function()
         local cmp = require('cmp')
@@ -57,7 +57,7 @@ M["hrsh7th/nvim-cmp"] = {
                 end, { "i", "s", "c" }),
             },
             sources = {
-                {name = 'copilot'},
+                -- {name = 'copilot'},
                 {name = 'nvim_lsp_signature_help'},
                 {name = 'nvim_lsp'},
                 {name = 'path'},
@@ -82,8 +82,8 @@ M["hrsh7th/nvim-cmp"] = {
         })
 
         -- Set up autopairs
-        autopairs.setup({})
-        cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({map_char = {tex = ''}}))
+        -- autopairs.setup({})
+        -- cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({map_char = {tex = ''}}))
     end
 }
 
@@ -111,8 +111,8 @@ M["hrsh7th/nvim-cmp"] = {
 --     end
 -- end, { "i", "s", "c" }),
 
-M["zbirenbaum/copilot.lua"] = {
-    config = function() require("copilot").setup() end,
-}
+-- M["zbirenbaum/copilot.lua"] = {
+--     config = function() require("copilot").setup() end,
+-- }
 
 return M

@@ -149,9 +149,7 @@ M['j-hui/fidget.nvim'] = {
 
 -- display diagnostic status in top right
 M['Mofiqul/trld.nvim'] = {
-    config = function()
-        require('trld').setup {}
-    end,
+    config = function() require('trld').setup {} end,
 }
 
 -- M['kosayoda/nvim-lightbulb'] = {

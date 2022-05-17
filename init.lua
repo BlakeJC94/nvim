@@ -1,6 +1,9 @@
 ----- BLAKEJC94S NEOVIM INIT.LUA ------------------------------------------------------------------
 
 PLUGINS = {
+    -- BASE PLUGINS
+    __editor__    = true,
+    __interface__ = true,
     -- EXTENSIONS
     cmp        = true,
     git        = true,
@@ -9,9 +12,6 @@ PLUGINS = {
     lualine    = true,
     telescope  = true,
     treesitter = true,
-    -- BASE PLUGINS
-    __editor__    = true,
-    __interface__ = true,
 }
 
 OPTIONS = {
@@ -99,15 +99,20 @@ MAPS = {
         -- Open folds when flicking through search matches
         ['n'] = 'nzv',
         ['N'] = 'Nzv',
-        -- Unmap q (and map Q to q to stop polluting registers accidentally!)
-        ['q'] = '',
-        ['Q'] = 'gq',
+        -- Remap q and Q to stop polluting registers accidentally!
+        ['q'] = 'gq',
+        ['Q'] = 'q',
         -- Navigate git changes in file
         [']g'] = {map=[[&diff ? ']g' : '<cmd>Gitsigns next_hunk<CR>']], opts={expr=true}},
         ['[g'] = {map=[[&diff ? '[g' : '<cmd>Gitsigns prev_hunk<CR>']], opts={expr=true}},
         -- Navigate diagnostics
         [']e'] = ':lua vim.diagnostic.goto_next()<CR>',
         ['[e'] = ':lua vim.diagnostic.goto_prev()<CR>',
+        -- Navigate quickfix list
+        [']c'] = ':cnext<CR>',
+        ['[c'] = ':cprev<CR>',
+        [']l'] = ':lnext<CR>',
+        ['[l'] = ':lprev<CR>',
         -- LSP bindings
         ['gd'] = ':Lsp definition<CR>',
         ['gD'] = ':Lsp declaration<CR>',
@@ -120,13 +125,13 @@ MAPS = {
         ['<Leader><CR>']     = ":Lir<CR>",                   -- File explorer
         ['<Leader><BS>']     = ":Telescope find_files<CR>",  -- File finder
         ['<Leader><Tab>']    = "<C-^>",                      -- Last file
-        ['<Leader><Esc>']    = ":q<CR>",                     -- Quit
-        ['<Leader><Leader>'] = ":Telescope buffers<CR>",     -- Buffers
+        ['<Leader><Esc>'] = ":Telescope buffers<CR>",     -- Buffers
+        ['<Leader>q'] = ":q<CR>",                            -- Quit
         ['<Leader>n'] = ":enew | echo '[New file]'<CR>",
         ['<Leader>N'] = ":bufdo bdel | enew | echo '[New session]'<CR>",
         ['<Leader>d'] = ":lcd %:p:h | echo 'Changed local dir to ' . getcwd()<CR>",
         ['<Leader>D'] = ":cd %:p:h | echo 'Changed dir to ' . getcwd()<CR>",
-        ['<Leader>q'] = ":ToggleQL<CR>",               -- Toggle qflist
+        ['<Leader>c'] = ":ToggleQL<CR>",               -- Toggle qflist
         ['<Leader>l'] = ":ToggleLL<CR>",               -- Toggle loclist
         ['<Leader>;'] = ":Settings<CR>",               -- Edit settings
         ['<Leader>:'] = ":luafile $MYVIMRC<CR>",       -- Reload settings
@@ -206,7 +211,7 @@ MAPS = {
         -- Toggle terminal
         ['<C-z>'] = "<Esc>:lua require('FTerm').toggle()<CR>",
         -- C-s : Quickly guess correct spelling errors (undoable)
-        -- ['<C-s>'] = '<C-g>u<Esc>[s1z=`]a<c-g>u', -- Currently borked by spellsitter
+        ['<C-s>'] = '<C-g>u<Esc>[s1z=`]a<c-g>u', -- Currently borked by spellsitter?
         -- Make <C-k> use lsp.hover, call twice to jump to hoverdoc
         ['<C-k>'] = '<C-o>:lua vim.lsp.buf.hover()<CR>',
     },
@@ -217,16 +222,6 @@ MAPS = {
         ['<Esc>:'] = '<C-\\><C-n>:',
         -- <C-z> => ToggleTerm Hide
         ['<C-z>'] = "<C-\\><C-n>:lua require('FTerm').toggle()<CR>",
-    },
-    o = {
-        -- Custom text object: "around document"
-        ['ad'] = '<Cmd>normal! ggVG<CR>',
-        ['id'] = '<Cmd>normal! ggVG<CR>',
-    },
-    x = {
-        -- Custom text object: "around document"
-        ['ad'] = 'gg0oG$',
-        ['id'] = 'gg0oG$',
     },
 }
 

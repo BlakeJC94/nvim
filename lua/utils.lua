@@ -26,21 +26,21 @@ M.arrow_maps = {
         ['<Down>']  = '',
         ['<Up>']    = '',
         ['<Right>'] = '',
-        -- [Ctrl + Arrow] to navigate windows
-        ['<C-Left>']  = ':wincmd h<CR>',
-        ['<C-Down>']  = ':wincmd j<CR>',
-        ['<C-Up>']    = ':wincmd k<CR>',
-        ['<C-Right>'] = ':wincmd l<CR>',
-        -- [Shift + Arrow] Move splits (drop <C-\><C-n> if using vim)
-        ['<S-Left>']  = ':wincmd H<CR>',
-        ['<S-Down>']  = ':wincmd J<CR>',
-        ['<S-Up>']    = ':wincmd K<CR>',
-        ['<S-Right>'] = ':wincmd L<CR>',
+        -- [Leader + Arrow] to navigate windows
+        ['<Leader><Left>']  = ':wincmd h<CR>',
+        ['<Leader><Down>']  = ':wincmd j<CR>',
+        ['<Leader><Up>']    = ':wincmd k<CR>',
+        ['<Leader><Right>'] = ':wincmd l<CR>',
         -- [Alt + Arrow] : resize splits
         ['<A-Left>']  = ':vertical resize -8<CR>',
         ['<A-Down>']  = ':resize -8<CR>',
         ['<A-Up>']    = ':resize +8<CR>',
         ['<A-Right>'] = ':vertical resize +8<CR>',
+        -- [Leader Alt + Arrow] Move splits (drop <C-\><C-n> if using vim)
+        ['<Leader><A-Left>']  = ':wincmd H<CR>',
+        ['<Leader><A-Down>']  = ':wincmd J<CR>',
+        ['<Leader><A-Up>']    = ':wincmd K<CR>',
+        ['<Leader><A-Right>'] = ':wincmd L<CR>',
     },
     t = {
         -- [Ctrl + Arrow] to navigate windows

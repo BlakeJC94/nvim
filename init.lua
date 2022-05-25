@@ -1,5 +1,5 @@
 ----- BLAKEJC94S NEOVIM INIT.LUA ------------------------------------------------------------------
-
+utils = require('utils')
 PLUGINS = {
     -- BASE PLUGINS
     __editor__    = true,
@@ -13,7 +13,6 @@ PLUGINS = {
     telescope  = true,
     treesitter = true,
 }
-
 OPTIONS = {
     BEHAVIOUR_OPTIONS = {
         -- MAIN INPUT/OUTPUT
@@ -76,7 +75,6 @@ OPTIONS = {
         showtabline = 0,  -- Display tab line (0, never, 1 auto, 2 always)
     },
 }
-
 MAPS = {
     [''] = {
         ['<F1>'] = {map=':setl relativenumber!<CR>:setl relativenumber?<CR>', opts={silent=false}},
@@ -225,7 +223,6 @@ MAPS = {
     },
 }
 
-utils = require('utils')
 
 -- LOAD SELECTED PLUGINS
 utils.disable_built_ins()

@@ -7,7 +7,7 @@ PLUGINS = {
     -- EXTENSIONS
     cmp        = true,
     git        = true,
-    lir        = true,
+    -- lir        = true,
     lsp        = true,
     lualine    = true,
     telescope  = true,
@@ -118,12 +118,29 @@ MAPS = {
         ['gr'] = ':Lsp references<CR>',
         ['gy'] = ':Lsp typedefinition<CR>',
         -- <C-z> => Toggle terminal
-        ['<C-z>'] = "<cmd>lua require('FTerm').toggle()<CR>",
+        -- ['<C-z>'] = "<cmd>lua require('FTerm').toggle()<CR>",
+        -- Navigation maps
+        ['<C-Left>']  = ':lua require("tmux").move_left()<CR>',
+        ['<C-Down>']  = ':lua require("tmux").move_bottom()<CR>',
+        ['<C-Up>']  = ':lua require("tmux").move_top()<CR>',
+        ['<C-Right>']  = ':lua require("tmux").move_right()<CR>',
+        ['<S-Left>']  = ':lua require("tmux").resize_left(8)<CR>',
+        ['<S-Down>']  = ':lua require("tmux").resize_bottom(8)<CR>',
+        ['<S-Up>']  = ':lua require("tmux").resize_top(8)<CR>',
+        ['<S-Right>']  = ':lua require("tmux").resize_right(8)<CR>',
+        ['<Leader><Left>']  = ':wincmd H<CR>',
+        ['<Leader><Down>']  = ':wincmd J<CR>',
+        ['<Leader><Up>']  = ':wincmd K<CR>',
+        ['<Leader><Right>']  = ':wincmd L<CR>',
+        ['<Leader>.'] = ":tabnext<CR>",
+        ['<Leader>,'] = ":tabprev<CR>",
+        ['<Leader><S-.>'] = ":+tabmove<CR>",
+        ['<Leader><S-,>'] = ":-tabmove<CR>",
         -- Leader maps
-        ['<Leader><CR>']     = ":Lir<CR>",                   -- File explorer
-        ['<Leader><BS>']     = ":Telescope find_files<CR>",  -- File finder
-        ['<Leader><Tab>']    = "<C-^>",                      -- Last file
-        ['<Leader><Esc>'] = ":Telescope buffers<CR>",     -- Buffers
+        ['<Leader><CR>']  = ":Telescope file_browser<CR>",
+        ['<Leader><BS>']  = ":Telescope find_files<CR>",               -- File finder
+        ['<Leader><Tab>'] = "<C-^>",                                   -- Last file
+        ['<Leader><Esc>'] = ":Telescope buffers<CR>",                     -- Buffers
         ['<Leader>q'] = ":q<CR>",                            -- Quit
         ['<Leader>n'] = ":enew | echo '[New file]'<CR>",
         ['<Leader>N'] = ":bufdo bdel | enew | echo '[New session]'<CR>",
@@ -136,7 +153,6 @@ MAPS = {
         ['<Leader>z'] = ":Twilight<CR>",               -- Toggle FocusMode
         ['<Leader>Z'] = ":ZenMode<CR>",                -- Toggle ZenMode
         ['<Leader>A'] = ":Neogen<CR>",                 -- Generate docs
-        -- ['<Leader>u'] = ":UndotreeToggle<CR>",         -- Toggle undotree
         -- Packer leader maps
         ['<Leader>pp'] = ':PackerSync<CR>',
         ['<Leader>pi'] = ':PackerInstall<CR>',
@@ -206,8 +222,6 @@ MAPS = {
         ['g_'] = ":s/\\%V_/ /g<CR>",
     },
     i = {
-        -- Toggle terminal
-        ['<C-z>'] = "<Esc>:lua require('FTerm').toggle()<CR>",
         -- C-s : Quickly guess correct spelling errors (undoable)
         ['<C-s>'] = '<C-g>u<Esc>[s1z=`]a<c-g>u', -- Currently borked by spellsitter?
         -- Make <C-k> use lsp.hover, call twice to jump to hoverdoc
@@ -218,11 +232,8 @@ MAPS = {
         ['<Esc><Esc>'] = '<C-\\><C-n>',
         -- <Esc>: => (terminal) go to command mode
         ['<Esc>:'] = '<C-\\><C-n>:',
-        -- <C-z> => ToggleTerm Hide
-        ['<C-z>'] = "<C-\\><C-n>:lua require('FTerm').toggle()<CR>",
     },
 }
-
 
 -- LOAD SELECTED PLUGINS
 utils.disable_built_ins()

@@ -9,6 +9,7 @@ M['nvim-telescope/telescope.nvim'] = {
     requires = {
         'nvim-lua/plenary.nvim',
         'nvim-telescope/telescope-fzf-native.nvim',
+        'nvim-telescope/telescope-file-browser.nvim',
     },
     config = function()
         local telescope = require('telescope')
@@ -31,21 +32,34 @@ M['nvim-telescope/telescope.nvim'] = {
                     override_file_sorter = true,
                     case_mode = "smart_case",
                 },
+                file_browser = {
+                    theme = "ivy",
+                    borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+                    previewer=false,
+                    hijack_netrw = true,
+                    path = "%:p:h",
+                    grouped = true,
+                    hidden = true,
+                    display_stat=false,
+                },
             },
             defaults = {
                 borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
                 mappings = telescope_mappings,
             },
             pickers = {
+                find_files = {
+                    hidden=true,
+                },
                 git_status = {
                     git_icons = {
-                        added = " ",
-                        changed = " ",
-                        copied = " ",
-                        deleted = " ",
-                        renamed = " ",
-                        unmerged = " ",
-                        untracked = " ",
+                        added = "",
+                        changed = "",
+                        copied = "",
+                        deleted = "",
+                        renamed = "",
+                        unmerged = "",
+                        untracked = "",
                     }
                 },
                 registers = {
@@ -60,6 +74,7 @@ M['nvim-telescope/telescope.nvim'] = {
         })
 
         telescope.load_extension('fzf')
+        telescope.load_extension('file_browser')
 
         -- Load a couple of custom colours
         vim.cmd [[

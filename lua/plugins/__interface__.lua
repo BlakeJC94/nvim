@@ -22,15 +22,17 @@ M["ellisonleao/gruvbox.nvim"] = {
     end,
 }
 
-M["numToStr/FTerm.nvim"] = {
-    config = function() require('FTerm').setup({}) end
-}
+-- M["numToStr/FTerm.nvim"] = {
+--     config = function() require('FTerm').setup({}) end
+-- }
 
 -- <C-c><C-c> => Send code snippet to neovim terminal
 M['jpalardy/vim-slime'] = {
     config = function()
-        vim.g.slime_target = "neovim"
+        vim.g.slime_target = "tmux"
+        vim.g.slime_paste_file = vim.fn.tempname()
         vim.g.slime_python_ipython = 1
+        vim.g.slime_default_config = {socket_name = "default", target_pane = "{last}"}
     end
 }
 
@@ -183,5 +185,39 @@ M["RRethy/vim-illuminate"] = {
 
 -- Highlighting for kitty config
 M["fladson/vim-kitty"] = {}
+
+M['oberblastmeister/termwrapper.nvim'] = {
+    config=function()
+        require"termwrapper".setup {
+            -- these are all of the defaults
+            open_autoinsert = true, -- autoinsert when opening
+            toggle_autoinsert = true, -- autoinsert when toggling
+            autoclose = true, -- autoclose, (no [Process exited 0])
+            winenter_autoinsert = false, -- autoinsert when entering the window
+            default_window_command = "belowright 13split", -- the default window command to run when none is specified,
+                                                           -- opens a window in the bottom
+            open_new_toggle = true, -- open a new terminal if the toggle target does not exist
+            log = 1, -- 1 = warning, 2 = info, 3 = debug
+        }
+    end
+}
+
+M['aserowy/tmux.nvim'] = {
+    config = function()
+        require("tmux").setup({
+            copy_sync = {
+                enable = false,
+            },
+            navigation = {
+                enable_default_keybindings = false,
+            },
+            resize = {
+                enable_default_keybindings = false,
+                resize_step_x = 8,
+                resize_step_y = 8,
+            }
+        })
+    end
+}
 
 return M

@@ -26,38 +26,29 @@ M.arrow_maps = {
         ['<Down>']  = '',
         ['<Up>']    = '',
         ['<Right>'] = '',
-        -- [Leader + Arrow] to navigate windows
-        ['<Leader><Left>']  = ':wincmd h<CR>',
-        ['<Leader><Down>']  = ':wincmd j<CR>',
-        ['<Leader><Up>']    = ':wincmd k<CR>',
-        ['<Leader><Right>'] = ':wincmd l<CR>',
-        -- [Alt + Arrow] : resize splits
-        ['<A-Left>']  = ':vertical resize -8<CR>',
-        ['<A-Down>']  = ':resize -8<CR>',
-        ['<A-Up>']    = ':resize +8<CR>',
-        ['<A-Right>'] = ':vertical resize +8<CR>',
-        -- [Leader Alt + Arrow] Move splits (drop <C-\><C-n> if using vim)
-        ['<Leader><A-Left>']  = ':wincmd H<CR>',
-        ['<Leader><A-Down>']  = ':wincmd J<CR>',
-        ['<Leader><A-Up>']    = ':wincmd K<CR>',
-        ['<Leader><A-Right>'] = ':wincmd L<CR>',
-    },
-    t = {
-        -- [Ctrl + Arrow] to navigate windows
-        ['<C-Left>']  = '<C-\\><C-n>:wincmd h<CR>',
-        ['<C-Down>']  = '<C-\\><C-n>:wincmd j<CR>',
-        ['<C-Up>']    = '<C-\\><C-n>:wincmd k<CR>',
-        ['<C-Right>'] = '<C-\\><C-n>:wincmd l<CR>',
-        -- [Shift + Arrow] Move splits
-        ['<S-Left>']  = '<C-\\><C-n>:wincmd H<CR>',
-        ['<S-Down>']  = '<C-\\><C-n>:wincmd J<CR>',
-        ['<S-Up>']    = '<C-\\><C-n>:wincmd K<CR>',
-        ['<S-Right>'] = '<C-\\><C-n>:wincmd L<CR>',
-        -- [Alt + Arrow] : resize splits
-        ['<A-Left>']  = '<C-\\><C-n>:vertical resize -8<CR>',
-        ['<A-Down>']  = '<C-\\><C-n>:resize -8<CR>',
-        ['<A-Up>']    = '<C-\\><C-n>:resize +8<CR>',
-        ['<A-Right>'] = '<C-\\><C-n>:vertical resize +8<CR>',
+        -- ['<C-Left>']  = '',
+        -- ['<C-Down>']  = '',
+        -- ['<C-Up>']    = '',
+        -- ['<C-Right>'] = '',
+        -- ['<S-Left>']  = '',
+        -- ['<S-Down>']  = '',
+        -- ['<S-Up>']    = '',
+        -- ['<S-Right>'] = '',
+        -- -- [Leader + Arrow] to navigate windows
+        -- ['<C-Left>']  = ':wincmd h<CR>',
+        -- ['<C-Down>']  = ':wincmd j<CR>',
+        -- ['<C-Up>']    = ':wincmd k<CR>',
+        -- ['<C-Right>'] = ':wincmd l<CR>',
+        -- -- [Leader + Ctrl + Arrow] : resize splits
+        -- ['<Leader><C-Left>']  = ':vertical resize -8<CR>',
+        -- ['<Leader><C-Down>']  = ':resize -8<CR>',
+        -- ['<Leader><C-Up>']    = ':resize +8<CR>',
+        -- ['<Leader><C-Right>'] = ':vertical resize +8<CR>',
+        -- -- [Leader Shift + Arrow] Move splits (drop <C-\><C-n> if using vim)
+        -- ['<Leader><S-Left>']  = ':wincmd h | wincmd x<CR>',
+        -- ['<Leader><S-Down>']  = ':wincmd j | wincmd x<CR>',
+        -- ['<Leader><S-Up>']    = ':wincmd k | wincmd x<CR>',
+        -- ['<Leader><S-Right>'] = ':wincmd l | wincmd x<CR>',
     },
     c = {
         -- Make vertical wildmenu controls behave intuitively

@@ -26,7 +26,7 @@ M["ellisonleao/gruvbox.nvim"] = {
 --     config = function() require('FTerm').setup({}) end
 -- }
 
--- <C-c><C-c> => Send code snippet to neovim terminal
+-- <C-c><C-c> => Send code snippet to terminal
 M['jpalardy/vim-slime'] = {
     config = function()
         vim.g.slime_target = "tmux"

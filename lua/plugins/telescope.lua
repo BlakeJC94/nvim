@@ -87,32 +87,6 @@ M['nvim-telescope/telescope.nvim'] = {
             highlight TelescopePreviewBorder guibg=#282828
             highlight TelescopePreviewNormal guibg=#282828
         ]]
-
-        require('utils').set_mapping_group({
-            [''] = {
-                ['<Leader>tT'] = ":Telescope<CR>",                            -- Find Telescopes
-                ['<Leader>tt'] = ":Telescope resume<CR>",                     -- Open last telescope
-                ['<Leader>tb'] = ":Telescope buffers<CR>",                    -- Switch between buffers
-                ['<Leader>tr'] = ":Telescope registers<CR>",                  -- Switch between buffers
-                ['<Leader>to'] = ":Telescope oldfiles<CR>",                   -- Recently changed files
-                ['<Leader>tf'] = ":Telescope current_buffer_fuzzy_find<CR>",  -- Jumping with fuzzyfind
-                ['<Leader>tF'] = ":Telescope live_grep<CR>",                  -- Jumping with livegrep
-                ['<Leader>th'] = ":Telescope help_tags<CR>",
-                ['<Leader>tg'] = ":Telescope git_status<CR>",
-                ['<Leader>tc'] = ":Telescope quickfix<CR>",
-                ['<Leader>tl'] = ":Telescope loclist<CR>",
-                ['<Leader>ts'] = ":Telescope spell_suggest<CR>",
-                ['<Leader>ta'] = ":Telescope lsp_code_actions<CR>",
-            },
-            n = {
-                -- Override spellchecker
-                ['z='] = {map=[[v:count ? v:count . 'z=' : ':Telescope spell_suggest<CR>']], opts={expr=true}},
-            },
-            i = {
-                -- C-r C-r : See registers with telescope
-                ['<C-r><C-r>'] = "<cmd>Telescope registers<CR>",
-            },
-        })
     end
 }
 

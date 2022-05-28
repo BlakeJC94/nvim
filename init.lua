@@ -85,7 +85,6 @@ MAPS = {
         -- Better splitting
         ['_'] = ':split<CR>',
         ['|'] = ':vsplit<CR>',
-        ['\\'] = ':tabedit %<CR>',  -- '\' needs to be escaped
         -- Move left and right faster
         ['H'] = {map=[[col('.') == match(getline('.'), '\S') + 1 ? '0' : '^']], opts={expr=true}},
         ['L'] = 'g_',
@@ -136,6 +135,7 @@ MAPS = {
         ['<Leader>,'] = ":tabprev<CR>",
         ['<Leader><S-.>'] = ":+tabmove<CR>",
         ['<Leader><S-,>'] = ":-tabmove<CR>",
+        ['<Leader>t'] = ':tabedit %<CR>',
         -- Leader maps
         ['<Leader><CR>']  = ":Telescope file_browser<CR>",
         ['<Leader><BS>']  = ":Telescope find_files<CR>",               -- File finder
@@ -153,6 +153,20 @@ MAPS = {
         ['<Leader>z'] = ":Twilight<CR>",               -- Toggle FocusMode
         ['<Leader>Z'] = ":ZenMode<CR>",                -- Toggle ZenMode
         ['<Leader>A'] = ":Neogen<CR>",                 -- Generate docs
+        -- Telescope leader maps
+        ['<Leader>fF'] = ":Telescope<CR>",                            -- Find Telescopes
+        ['<Leader>ff'] = ":Telescope resume<CR>",                     -- Open last telescope
+        ['<Leader>fb'] = ":Telescope buffers<CR>",                    -- Switch between buffers
+        ['<Leader>fr'] = ":Telescope registers<CR>",                  -- Switch between buffers
+        ['<Leader>fo'] = ":Telescope oldfiles<CR>",                   -- Recently changed files
+        ['<Leader>f/'] = ":Telescope current_buffer_fuzzy_find<CR>",  -- Jumping with fuzzyfind
+        ['<Leader>fG'] = ":Telescope live_grep<CR>",                  -- Jumping with livegrep
+        ['<Leader>fh'] = ":Telescope help_tags<CR>",
+        -- ['<Leader>fg'] = ":Telescope git_status<CR>",
+        ['<Leader>fc'] = ":Telescope quickfix<CR>",
+        ['<Leader>fl'] = ":Telescope loclist<CR>",
+        ['<Leader>fs'] = ":Telescope spell_suggest<CR>",
+        ['<Leader>fa'] = ":Telescope lsp_code_actions<CR>",
         -- Packer leader maps
         ['<Leader>pp'] = ':PackerSync<CR>',
         ['<Leader>pi'] = ':PackerInstall<CR>',
@@ -205,6 +219,8 @@ MAPS = {
         ['d#'] = "?\\<<C-r>=expand('<cword>')<CR>\\>\\C<CR>``dgN",
         -- Make K use lsp.hover, call twice to jump to hoverdoc
         ['K'] = ':Lsp hover<CR>',
+        -- Override spellchecker
+        ['z='] = {map=[[v:count ? v:count . 'z=' : ':Telescope spell_suggest<CR>']], opts={expr=true}},
     },
     v = {
         -- Maintain Visual Mode after >/</= actions
@@ -226,6 +242,8 @@ MAPS = {
         ['<C-s>'] = '<C-g>u<Esc>[s1z=`]a<c-g>u', -- Currently borked by spellsitter?
         -- Make <C-k> use lsp.hover, call twice to jump to hoverdoc
         ['<C-k>'] = '<C-o>:lua vim.lsp.buf.hover()<CR>',
+        -- C-r C-r : See registers with telescope
+        ['<C-r><C-r>'] = "<cmd>Telescope registers<CR>",
     },
     t = {
         -- <Esc><Esc> => (terminal) go to normal mode

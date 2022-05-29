@@ -17,8 +17,8 @@ augroup style
     autocmd InsertEnter * setl cursorline nornu cc=100,101
     autocmd InsertLeave * setl nocursorline rnu cc=
     " toggle numbers when entering/exiting terminal mode
-    autocmd TermEnter * setl nornu nonu
-    autocmd TermLeave * setl rnu nu
+    " autocmd TermEnter * setl nornu nonu
+    " autocmd TermLeave * setl rnu nu
     " echo a vimtip when opening vim
     autocmd VimEnter * VimTip
     " highlight yanked regions

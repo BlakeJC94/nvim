@@ -7,7 +7,6 @@ PLUGINS = {
     -- EXTENSIONS
     cmp        = true,
     git        = true,
-    -- lir        = true,
     lsp        = true,
     lualine    = true,
     telescope  = true,
@@ -121,7 +120,7 @@ MAPS = {
         ['<C-x><C-x>'] = ":lua require('FTerm').toggle()<CR>",
         ['<C-x>_'] = ":lua require('FTerm').toggle(); vim.cmd('wincmd J')<CR>",
         ['<C-x>|'] = ":lua require('FTerm').toggle(); vim.cmd('wincmd L')<CR>",
-        -- Navigation maps
+        -- Window controls maps
         ['<C-Left>']  = ':lua require("tmux").move_left()<CR>',
         ['<C-Down>']  = ':lua require("tmux").move_bottom()<CR>',
         ['<C-Up>']    = ':lua require("tmux").move_top()<CR>',
@@ -134,6 +133,7 @@ MAPS = {
         ['<Leader><Down>']  = ':wincmd J<CR>',
         ['<Leader><Up>']    = ':wincmd K<CR>',
         ['<Leader><Right>'] = ':wincmd L<CR>',
+        -- Tab controls
         ['<Leader>.'] = ":tabnext<CR>",
         ['<Leader>,'] = ":tabprev<CR>",
         ['<Leader><S-.>'] = ":+tabmove<CR>",
@@ -157,15 +157,15 @@ MAPS = {
         ['<Leader>Z'] = ":ZenMode<CR>",                -- Toggle ZenMode
         ['<Leader>A'] = ":Neogen<CR>",                 -- Generate docs
         -- Telescope leader maps
-        ['<Leader>fF'] = ":Telescope<CR>",                            -- Find Telescopes
         ['<Leader>ff'] = ":Telescope resume<CR>",                     -- Open last telescope
+        ['<Leader>fF'] = ":Telescope<CR>",                            -- Find Telescopes
         ['<Leader>fb'] = ":Telescope buffers<CR>",                    -- Switch between buffers
         ['<Leader>fr'] = ":Telescope registers<CR>",                  -- Switch between buffers
         ['<Leader>fo'] = ":Telescope oldfiles<CR>",                   -- Recently changed files
         ['<Leader>f/'] = ":Telescope current_buffer_fuzzy_find<CR>",  -- Jumping with fuzzyfind
         ['<Leader>fG'] = ":Telescope live_grep<CR>",                  -- Jumping with livegrep
         ['<Leader>fh'] = ":Telescope help_tags<CR>",
-        -- ['<Leader>fg'] = ":Telescope git_status<CR>",
+        ['<Leader>fg'] = ":Telescope git_status<CR>",
         ['<Leader>fc'] = ":Telescope quickfix<CR>",
         ['<Leader>fl'] = ":Telescope loclist<CR>",
         ['<Leader>fs'] = ":Telescope spell_suggest<CR>",
@@ -178,17 +178,21 @@ MAPS = {
         ['<Leader>pr'] = ':PackerClean<CR>',
         ['<Leader>ps'] = ':PackerStatus<CR>',
         -- Git leader maps
-        ['<Leader>G']  = ':Git<CR>',
-        ['<Leader>gg'] = ':Gitsigns setqflist<CR>',
+        ['<Leader>gg'] = ':Git<CR>',
+        ['<Leader>gs'] = ':Git status<CR>',
+        ['<Leader>gc'] = ':Git commit | startinsert<CR>',
+        ['<Leader>gp'] = ':Gitsigns preview_hunk<CR>',
         ['<Leader>gs'] = ':Gitsigns stage_hunk<CR>',
         ['<Leader>gu'] = ':Gitsigns undo_stage_hunk<CR>',
         ['<Leader>gr'] = ':Gitsigns reset_hunk<CR>',
-        ['<Leader>gR'] = ':Gitsigns reset_buffer<CR>',
-        ['<Leader>gp'] = ':Gitsigns preview_hunk<CR>',
-        ['<Leader>gb'] = ':lua require("gitsigns").blame_line({full=true})<CR>',
         ['<Leader>gS'] = ':Gitsigns stage_buffer<CR>',
-        ['<Leader>gU'] = ':Gitsigns reset_buffer_index<CR>',
-        ['<Leader>gd'] = ':vert Gdiffsplit<CR>',
+        ['<Leader>gU'] = ':Gitsigns reset_buffer_index<CR>'
+        ['<Leader>gR'] = ':Gitsigns reset_buffer<CR>',
+        ['<Leader>gd'] = ':Git difftool<CR>',
+        ['<Leader>gm'] = ':Git mergetool<CR>',
+        ['<Leader>gb'] = ':lua require("gitsigns").blame_line({full=true})<CR>',
+        ['<Leader>g|'] = ':Gvdiffsplit<CR>',
+        ['<Leader>g_'] = ':Gdiffsplit<CR>',
         -- LSP Leader bindings
         ['<Leader>e'] = ':lua vim.diagnostic.open_float()<CR>',  -- Show line diagnostics
         ['<Leader>E'] = ':lua vim.diagnostic.setloclist()<CR>',  -- Show buffer diagnostics
@@ -264,6 +268,11 @@ MAPS = {
         ['<C-x><Down>']  = '<C-\\><C-n>:wincmd J<CR>',
         ['<C-x><Up>']    = '<C-\\><C-n>:wincmd K<CR>',
         ['<C-x><Right>'] = '<C-\\><C-n>:wincmd L<CR>',
+        -- Tab navigation
+        ['<C-x>.'] = ":tabnext<CR>",
+        ['<C-x>,'] = ":tabprev<CR>",
+        ['<C-x><S-.>'] = ":+tabmove<CR>",
+        ['<C-x><S-,>'] = ":-tabmove<CR>",
         -- <Esc><Esc> => (terminal) go to normal mode
         ['<C-x><Esc>'] = '<C-\\><C-n>',
         -- <Esc>: => (terminal) go to command mode

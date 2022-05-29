@@ -186,46 +186,28 @@ M["RRethy/vim-illuminate"] = {
 -- Highlighting for kitty config
 M["fladson/vim-kitty"] = {}
 
--- Conceal ansi codes with `filtetype=terminal`
-M['norcalli/nvim-terminal.lua'] = {
-    config = function() require'terminal'.setup() end
-}
-
 M['numToStr/FTerm.nvim'] = {
     config=function()
         -- require("FTerm").setup()
     end
 }
 
--- M['aserowy/tmux.nvim'] = {
---     config = function()
---         require("tmux").setup({
---             copy_sync = {
---                 enable = false,
---             },
---             navigation = {
---                 enable_default_keybindings = false,
---             },
---             resize = {
---                 enable_default_keybindings = false,
---                 resize_step_x = 8,
---                 resize_step_y = 8,
---             }
---         })
---     end
--- }
--- MAPPINGS TO USE :
--- ['<C-Left>']  = ':lua require("tmux").move_left()<CR>',
--- ['<C-Down>']  = ':lua require("tmux").move_bottom()<CR>',
--- ['<C-Up>']    = ':lua require("tmux").move_top()<CR>',
--- ['<C-Right>'] = ':lua require("tmux").move_right()<CR>',
--- ['<S-Left>']  = ':lua require("tmux").resize_left(8)<CR>',
--- ['<S-Down>']  = ':lua require("tmux").resize_bottom(8)<CR>',
--- ['<S-Up>']    = ':lua require("tmux").resize_top(8)<CR>',
--- ['<S-Right>'] = ':lua require("tmux").resize_right(8)<CR>',
--- ['<Leader><Left>']  = ':wincmd H<CR>',
--- ['<Leader><Down>']  = ':wincmd J<CR>',
--- ['<Leader><Up>']    = ':wincmd K<CR>',
--- ['<Leader><Right>'] = ':wincmd L<CR>',
+M['aserowy/tmux.nvim'] = {
+    config = function()
+        require("tmux").setup({
+            copy_sync = {
+                enable = false,
+            },
+            navigation = {
+                enable_default_keybindings = false,
+            },
+            resize = {
+                enable_default_keybindings = false,
+                resize_step_x = 8,
+                resize_step_y = 8,
+            }
+        })
+    end
+}
 
 return M

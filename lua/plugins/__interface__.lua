@@ -29,10 +29,10 @@ M["ellisonleao/gruvbox.nvim"] = {
 -- <C-c><C-c> => Send code snippet to terminal
 M['jpalardy/vim-slime'] = {
     config = function()
-        vim.g.slime_target = "tmux"
-        vim.g.slime_paste_file = vim.fn.tempname()
+        vim.g.slime_target = "nvim"
         vim.g.slime_python_ipython = 1
-        vim.g.slime_default_config = {socket_name = "default", target_pane = "{last}"}
+        -- vim.g.slime_paste_file = vim.fn.tempname()
+        -- vim.g.slime_default_config = {socket_name = "default", target_pane = "{last}"}
     end
 }
 
@@ -186,38 +186,46 @@ M["RRethy/vim-illuminate"] = {
 -- Highlighting for kitty config
 M["fladson/vim-kitty"] = {}
 
-M['oberblastmeister/termwrapper.nvim'] = {
+-- Conceal ansi codes with `filtetype=terminal`
+M['norcalli/nvim-terminal.lua'] = {
+    config = function() require'terminal'.setup() end
+}
+
+M['numToStr/FTerm.nvim'] = {
     config=function()
-        require"termwrapper".setup {
-            -- these are all of the defaults
-            open_autoinsert = true, -- autoinsert when opening
-            toggle_autoinsert = true, -- autoinsert when toggling
-            autoclose = true, -- autoclose, (no [Process exited 0])
-            winenter_autoinsert = false, -- autoinsert when entering the window
-            default_window_command = "belowright 13split", -- the default window command to run when none is specified,
-                                                           -- opens a window in the bottom
-            open_new_toggle = true, -- open a new terminal if the toggle target does not exist
-            log = 1, -- 1 = warning, 2 = info, 3 = debug
-        }
+        -- require("FTerm").setup()
     end
 }
 
-M['aserowy/tmux.nvim'] = {
-    config = function()
-        require("tmux").setup({
-            copy_sync = {
-                enable = false,
-            },
-            navigation = {
-                enable_default_keybindings = false,
-            },
-            resize = {
-                enable_default_keybindings = false,
-                resize_step_x = 8,
-                resize_step_y = 8,
-            }
-        })
-    end
-}
+-- M['aserowy/tmux.nvim'] = {
+--     config = function()
+--         require("tmux").setup({
+--             copy_sync = {
+--                 enable = false,
+--             },
+--             navigation = {
+--                 enable_default_keybindings = false,
+--             },
+--             resize = {
+--                 enable_default_keybindings = false,
+--                 resize_step_x = 8,
+--                 resize_step_y = 8,
+--             }
+--         })
+--     end
+-- }
+-- MAPPINGS TO USE :
+-- ['<C-Left>']  = ':lua require("tmux").move_left()<CR>',
+-- ['<C-Down>']  = ':lua require("tmux").move_bottom()<CR>',
+-- ['<C-Up>']    = ':lua require("tmux").move_top()<CR>',
+-- ['<C-Right>'] = ':lua require("tmux").move_right()<CR>',
+-- ['<S-Left>']  = ':lua require("tmux").resize_left(8)<CR>',
+-- ['<S-Down>']  = ':lua require("tmux").resize_bottom(8)<CR>',
+-- ['<S-Up>']    = ':lua require("tmux").resize_top(8)<CR>',
+-- ['<S-Right>'] = ':lua require("tmux").resize_right(8)<CR>',
+-- ['<Leader><Left>']  = ':wincmd H<CR>',
+-- ['<Leader><Down>']  = ':wincmd J<CR>',
+-- ['<Leader><Up>']    = ':wincmd K<CR>',
+-- ['<Leader><Right>'] = ':wincmd L<CR>',
 
 return M

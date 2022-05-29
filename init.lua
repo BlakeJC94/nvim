@@ -117,20 +117,23 @@ MAPS = {
         ['gr'] = ':Lsp references<CR>',
         ['gy'] = ':Lsp typedefinition<CR>',
         -- <C-z> => Toggle terminal
-        -- ['<C-z>'] = "<cmd>lua require('FTerm').toggle()<CR>",
+        ['<C-z>'] = "",
+        ['<C-z><C-z>'] = ":lua require('FTerm').toggle()<CR>",
+        ['<C-z>_'] = ":lua require('FTerm').toggle(); vim.cmd('wincmd J')<CR>",
+        ['<C-z>|'] = ":lua require('FTerm').toggle(); vim.cmd('wincmd L')<CR>",
         -- Navigation maps
-        ['<C-Left>']  = ':lua require("tmux").move_left()<CR>',
-        ['<C-Down>']  = ':lua require("tmux").move_bottom()<CR>',
-        ['<C-Up>']  = ':lua require("tmux").move_top()<CR>',
-        ['<C-Right>']  = ':lua require("tmux").move_right()<CR>',
-        ['<S-Left>']  = ':lua require("tmux").resize_left(8)<CR>',
-        ['<S-Down>']  = ':lua require("tmux").resize_bottom(8)<CR>',
-        ['<S-Up>']  = ':lua require("tmux").resize_top(8)<CR>',
-        ['<S-Right>']  = ':lua require("tmux").resize_right(8)<CR>',
+        ['<C-Left>']  = ':wincmd h<CR>',
+        ['<C-Down>']  = ':wincmd j<CR>',
+        ['<C-Up>']    = ':wincmd k<CR>',
+        ['<C-Right>'] = ':wincmd l<CR>',
+        ['<S-Left>']  = ':vertical resize -8<CR>',
+        ['<S-Down>']  = ':resize -8<CR>',
+        ['<S-Up>']    = ':resize +8<CR>',
+        ['<S-Right>'] = ':vertical resize +8<CR>',
         ['<Leader><Left>']  = ':wincmd H<CR>',
         ['<Leader><Down>']  = ':wincmd J<CR>',
-        ['<Leader><Up>']  = ':wincmd K<CR>',
-        ['<Leader><Right>']  = ':wincmd L<CR>',
+        ['<Leader><Up>']    = ':wincmd K<CR>',
+        ['<Leader><Right>'] = ':wincmd L<CR>',
         ['<Leader>.'] = ":tabnext<CR>",
         ['<Leader>,'] = ":tabprev<CR>",
         ['<Leader><S-.>'] = ":+tabmove<CR>",
@@ -247,9 +250,26 @@ MAPS = {
     },
     t = {
         -- <Esc><Esc> => (terminal) go to normal mode
-        ['<Esc><Esc>'] = '<C-\\><C-n>',
+        ['<C-z><Esc>'] = '<C-\\><C-n>',
         -- <Esc>: => (terminal) go to command mode
-        ['<Esc>:'] = '<C-\\><C-n>:',
+        ['<C-z>:'] = '<C-\\><C-n>:',
+        -- <C-z> => ToggleTerm Hide
+        ['<C-z><C-z>'] = "<C-\\><C-n>:lua require('FTerm').toggle()<CR>",
+        -- [Ctrl + Arrow] to navigate windows
+        ['<C-Left>']  = '<C-\\><C-n>:wincmd h<CR>',
+        ['<C-Down>']  = '<C-\\><C-n>:wincmd j<CR>',
+        ['<C-Up>']    = '<C-\\><C-n>:wincmd k<CR>',
+        ['<C-Right>'] = '<C-\\><C-n>:wincmd l<CR>',
+        -- [Shift + Arrow] Move splits
+        ['<C-z><Left>']  = '<C-\\><C-n>:wincmd H<CR>',
+        ['<C-z><Down>']  = '<C-\\><C-n>:wincmd J<CR>',
+        ['<C-z><Up>']    = '<C-\\><C-n>:wincmd K<CR>',
+        ['<C-z><Right>'] = '<C-\\><C-n>:wincmd L<CR>',
+        -- [Shift + Arrow] : resize splits
+        ['<S-Left>']  = '<C-\\><C-n>:vertical resize -8<CR>',
+        ['<S-Down>']  = '<C-\\><C-n>:resize -8<CR>',
+        ['<S-Up>']    = '<C-\\><C-n>:resize +8<CR>',
+        ['<S-Right>'] = '<C-\\><C-n>:vertical resize +8<CR>',
     },
 }
 

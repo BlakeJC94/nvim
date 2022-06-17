@@ -29,7 +29,7 @@ M["ellisonleao/gruvbox.nvim"] = {
 -- <C-c><C-c> => Send code snippet to terminal
 M['jpalardy/vim-slime'] = {
     config = function()
-        vim.g.slime_target = "nvim"
+        vim.g.slime_target = "neovim"
         vim.g.slime_python_ipython = 1
         -- vim.g.slime_paste_file = vim.fn.tempname()
         -- vim.g.slime_default_config = {socket_name = "default", target_pane = "{last}"}
@@ -38,6 +38,19 @@ M['jpalardy/vim-slime'] = {
 
 -- Toggle undotree
 -- M['mbbill/undotree'] = {}
+
+--
+M['folke/twilight.nvim'] = {
+    config = function() require("twilight").setup({
+        dimming = {
+            alpha = 1.0, -- amount of dimming
+            -- we try to get the foreground from the highlight groups or fallback color
+            color = { "Normal", "#ffffff" },
+            inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
+        },
+    }) end
+}
+
 
 -- :ZenMode => Toggle Focus Mode (:Twilight => Toggle Focus highlights)
 M["folke/zen-mode.nvim"] = {
@@ -85,6 +98,8 @@ M["folke/zen-mode.nvim"] = {
 --         ]]
 --     end
 -- }
+
+M['5long/pytest-vim-compiler'] = {}
 
 -- Better quickfix list format
 M['https://gitlab.com/yorickpeterse/nvim-pqf'] = {

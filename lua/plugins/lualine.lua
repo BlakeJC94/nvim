@@ -23,7 +23,7 @@ M['nvim-lualine/lualine.nvim'] = {
                 lualine_c = {'filename', 'lsp_progress'},
                 lualine_x = {'filetype'},
                 lualine_y = {'location', 'progress'},
-                lualine_z = {'tabs'},
+                lualine_z = { { 'tabs', mode = 1, } },
             },
             inactive_sections = {
                 lualine_a = {},

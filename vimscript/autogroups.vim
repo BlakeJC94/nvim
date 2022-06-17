@@ -9,6 +9,8 @@ augroup base
     autocmd BufWritePre * TrimSpaces
     " create nested directories if needed when creating files
     autocmd BufWritePre,FileWritePre * silent! call mkdir(expand('<afile>:p:h'), 'p')
+    " Auto instert mode when entering terminal mode
+    autocmd WinEnter term://* startinsert
 augroup END
 
 augroup style
@@ -30,7 +32,6 @@ augroup ft_extra
     " Make cmdwindows close with q
     autocmd CmdwinEnter * nnoremap <buffer> q :q<CR>
     autocmd CmdwinEnter * luaeval("require('cmp').setup.buffer({enabled = false})")
-    " autocmd! CmdwinEnter * lua require('cmp').setup.buffer({enabled = false})
     " help/cmd win/qf list: Press q to close and disable spellcheck
     autocmd FileType qf,help,fugitive nnoremap <buffer> q :q<CR>
     autocmd FileType qf,help,fugitive setlocal nospell

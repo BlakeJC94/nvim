@@ -81,9 +81,6 @@ MAPS = {
         ['<F3>'] = {map=':setl wrap!<CR>:setl wrap?<CR>', opts={silent=false}},
         ['<F4>'] = {map=':setl spell!<CR>:setl spell?<CR>', opts={silent=false}},
         ['<F6>'] = {map=':wincmd =<CR>', opts={silent=false}},
-        -- Better splitting
-        ['_'] = ':split<CR>',
-        ['|'] = ':vsplit<CR>',
         -- Move left and right faster
         ['H'] = {map=[[col('.') == match(getline('.'), '\S') + 1 ? '0' : '^']], opts={expr=true}},
         ['L'] = 'g_',
@@ -115,11 +112,14 @@ MAPS = {
         ['gI'] = ':Lsp implementation<CR>',
         ['gr'] = ':Lsp references<CR>',
         ['gy'] = ':Lsp typedefinition<CR>',
-        -- <C-x> => Toggle terminal
-        ['<C-x>'] = "",
-        ['<C-x><C-x>'] = ":lua require('FTerm').toggle()<CR>",
-        ['<C-x>_'] = ":lua require('FTerm').toggle(); vim.cmd('wincmd J')<CR>",
-        ['<C-x>|'] = ":lua require('FTerm').toggle(); vim.cmd('wincmd L')<CR>",
+        -- <C-z> => Toggle terminal
+        ['<C-z>'] = "",
+        ['<C-z><C-z>'] = ":lua require('FTerm').toggle()<CR>",
+        ['<C-z>_'] = ":lua require('FTerm').toggle(); vim.cmd('wincmd J')<CR>",
+        ['<C-z>|'] = ":lua require('FTerm').toggle(); vim.cmd('wincmd L')<CR>",
+        -- Pane controls
+        ['<Leader>_'] = ':split<CR>',
+        ['<Leader>|'] = ':vsplit<CR>',
         -- Window controls maps
         ['<C-Left>']  = ':lua require("tmux").move_left()<CR>',
         ['<C-Down>']  = ':lua require("tmux").move_bottom()<CR>',
@@ -136,8 +136,8 @@ MAPS = {
         -- Tab controls
         ['<Leader>.'] = ":tabnext<CR>",
         ['<Leader>,'] = ":tabprev<CR>",
-        ['<Leader><S-.>'] = ":+tabmove<CR>",
-        ['<Leader><S-,>'] = ":-tabmove<CR>",
+        ['<Leader>>'] = ":+tabmove<CR>",
+        ['<Leader><'] = ":-tabmove<CR>",
         ['<Leader>t'] = ':tabedit %<CR>',
         -- Leader maps
         ['<Leader><CR>']  = ":Telescope file_browser<CR>",
@@ -145,6 +145,7 @@ MAPS = {
         ['<Leader><Tab>'] = "<C-^>",                                   -- Last file
         ['<Leader><Esc>'] = ":Telescope buffers<CR>",                     -- Buffers
         ['<Leader>q'] = ":q<CR>",                            -- Quit
+        ['<Leader>w'] = ":w<CR>",                            -- Save
         ['<Leader>n'] = ":enew | echo '[New file]'<CR>",
         ['<Leader>N'] = ":bufdo bdel | enew | echo '[New session]'<CR>",
         ['<Leader>d'] = ":lcd %:p:h | echo 'Changed local dir to ' . getcwd()<CR>",
@@ -186,7 +187,7 @@ MAPS = {
         ['<Leader>gu'] = ':Gitsigns undo_stage_hunk<CR>',
         ['<Leader>gr'] = ':Gitsigns reset_hunk<CR>',
         ['<Leader>gS'] = ':Gitsigns stage_buffer<CR>',
-        ['<Leader>gU'] = ':Gitsigns reset_buffer_index<CR>'
+        ['<Leader>gU'] = ':Gitsigns reset_buffer_index<CR>',
         ['<Leader>gR'] = ':Gitsigns reset_buffer<CR>',
         ['<Leader>gd'] = ':Git difftool<CR>',
         ['<Leader>gm'] = ':Git mergetool<CR>',
@@ -264,21 +265,31 @@ MAPS = {
         ['<S-Up>']    = '<C-\\><C-n>:lua require("tmux").resize_top(8)<CR>',
         ['<S-Right>'] = '<C-\\><C-n>:lua require("tmux").resize_right(8)<CR>',
         -- [Leader + Arrow] Move splits
-        ['<C-x><Left>']  = '<C-\\><C-n>:wincmd H<CR>',
-        ['<C-x><Down>']  = '<C-\\><C-n>:wincmd J<CR>',
-        ['<C-x><Up>']    = '<C-\\><C-n>:wincmd K<CR>',
-        ['<C-x><Right>'] = '<C-\\><C-n>:wincmd L<CR>',
+        ['<C-z><Left>']  = '<C-\\><C-n>:wincmd H<CR>',
+        ['<C-z><Down>']  = '<C-\\><C-n>:wincmd J<CR>',
+        ['<C-z><Up>']    = '<C-\\><C-n>:wincmd K<CR>',
+        ['<C-z><Right>'] = '<C-\\><C-n>:wincmd L<CR>',
         -- Tab navigation
-        ['<C-x>.'] = ":tabnext<CR>",
-        ['<C-x>,'] = ":tabprev<CR>",
-        ['<C-x><S-.>'] = ":+tabmove<CR>",
-        ['<C-x><S-,>'] = ":-tabmove<CR>",
+        ['<C-z>.'] = "<C-\\><C-n>:tabnext<CR>",
+        ['<C-z>,'] = "<C-\\><C-n>:tabprev<CR>",
+        ['<C-z><S-.>'] = "<C-\\><C-n>:+tabmove<CR>",
+        ['<C-z><S-,>'] = "<C-\\><C-n>:-tabmove<CR>",
         -- <Esc><Esc> => (terminal) go to normal mode
-        ['<C-x><Esc>'] = '<C-\\><C-n>',
+        ['<C-z><Esc>'] = '<C-\\><C-n>',
         -- <Esc>: => (terminal) go to command mode
-        ['<C-x>:'] = '<C-\\><C-n>:',
-        -- <C-x> => ToggleTerm Hide
-        ['<C-x><C-x>'] = "<C-\\><C-n>:lua require('FTerm').toggle()<CR>",
+        ['<C-z>:'] = '<C-\\><C-n>:',
+        -- <C-z> => ToggleTerm Hide
+        ['<C-z><C-z>'] = "<C-\\><C-n>:lua require('FTerm').toggle()<CR>",
+    },
+    o = {
+        -- Custom text object: "around document"
+        ['ad'] = '<Cmd>normal! ggVG<CR>',
+        ['id'] = '<Cmd>normal! ggVG<CR>',
+    },
+    x = {
+        -- Custom text object: "around document"
+        ['ad'] = 'gg0oG$',
+        ['id'] = 'gg0oG$',
     },
 }
 

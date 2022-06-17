@@ -15,12 +15,13 @@ M['nvim-telescope/telescope.nvim'] = {
         local telescope = require('telescope')
         local actions = require('telescope.actions')
 
+        -- Use <C-q> to send results to qf
         local telescope_mappings = {
             n = {
-                ["q"] = actions.close  -- Make q close telescope window
+                ["q"] = actions.close,
             },
             i = {
-                ["<esc>"] = actions.close
+                ["<esc>"] = actions.close,
             },
         }
 
@@ -33,19 +34,23 @@ M['nvim-telescope/telescope.nvim'] = {
                     case_mode = "smart_case",
                 },
                 file_browser = {
-                    theme = "ivy",
-                    borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+                    -- theme = "cursor",
+                    -- borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+                    layout_config = {
+                        width = 60,
+                    },
                     previewer=false,
                     hijack_netrw = true,
                     path = "%:p:h",
                     grouped = true,
                     hidden = true,
-                    display_stat=false,
+                    display_stat = false,
                 },
             },
             defaults = {
                 borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
                 mappings = telescope_mappings,
+                file_ignore_patterns = {"%/.git/", "%/__pycache__/", "%/data/"},
             },
             pickers = {
                 find_files = {

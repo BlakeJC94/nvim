@@ -27,7 +27,7 @@ options = {
         spell    = true,   -- Built-in spell-checker
         undofile = true,   -- Create global undofile
         undodir  = os.getenv("HOME") .. '/.vim/undodir',
-    }
+    },
     LAYOUT_OPTIONS = {
         -- WINDOW DISPLAY
         splitbelow    = true,              -- Open splits below
@@ -73,13 +73,13 @@ if status_ok then
 end
 
 vim.g.mapleader = " "
-config = {
-    {utils._set_options,      options                },
-    {utils._set_functions,    require('functions')   },
-    {utils._set_autocommands, require('autocommands')},
-    {utils._set_commands,     require('commands')    },
-    {utils._set_mappings,     require('mappings')    },
+nvim_config = {
+    options = options,
+    functions = require('functions'),
+    autocommands = require('autocommands'),
+    commands = require('commands'),
+    mappings = require('mappings'),
 }
-for _, table in pairs(config) do
-    utils.load(table[1], table[2])
+for key, table in pairs(nvim_config) do
+    utils.load(key, table)
 end

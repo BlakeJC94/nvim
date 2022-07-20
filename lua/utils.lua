@@ -1,25 +1,7 @@
 M = {}
 
-DISABLED_BUILT_INS = {
-    'netrw',
-    'netrwPlugin',
-    'gzip',
-    'man',
-    'shada_plugin',
-    'tarPlugin',
-    'tar',
-    'zipPlugin',
-    'zip',
-    'netrwPlugin',
-    'tutor_mode_plugin',
-    'remote_plugins',
-    'spellfile_plugin',
-    '2html_plugin',
-}
-
 DEFAULT_MAP_OPTS = {noremap = true, silent = true}
 DEFAULT_CMD_OPTS = {force = true}
-
 
 M.setup_packer = function()
     local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -32,12 +14,6 @@ M.setup_packer = function()
 
     -- Add packer to managed plugins
     vim.cmd("packadd packer.nvim")
-end
-
-M.disable_built_ins = function()
-    for _, i in pairs(DISABLED_BUILT_INS) do
-        vim.g['loaded_' .. i] = 1
-    end
 end
 
 M.add_plugins = function(plugins, configs, packer)
@@ -57,23 +33,6 @@ M.add_plugins = function(plugins, configs, packer)
 end
 
 -- -----------------------------
-M.load = function(setter, groups)
-    -- setter should be a function
-    if type(setter) ~= "function" then return end
-
-    -- `groups` should be a table of tables
-    -- groups = {group_name: {setter_args}}
-    if type(groups) ~= "table" then return end
-    for _k, v in pairs(groups) do
-        if type(v) ~= "table" then return end
-    end
-
-    -- Apply setter to each group
-    for name, group in pairs(groups) do
-        setter(name, group)
-    end
-end
-
 M._set_options = function(_, options)
     for k, v in pairs(options) do vim.opt[k] = v end
 end
@@ -128,10 +87,31 @@ M._set_mappings = function(_, mappings)
     end
 end
 
--- TODO
--- M._set_plugins = function(name, plugins)
--- end
+SETTERS = {
+    options = M._set_options,
+    functions = M._set_functions,
+    autocommands = M._set_autocommands,
+    commands = M._set_commands,
+    mappings = M._set_mappings,
+}
 
+M.load = function(mode, groups)
+    -- setter should be a function
+    local setter = SETTERS[mode]
+    if setter == nil then return end
+
+    -- `groups` should be a table of tables
+    -- groups = {group_name: {setter_args}}
+    if type(groups) ~= "table" then return end
+    for _k, v in pairs(groups) do
+        if type(v) ~= "table" then return end
+    end
+
+    -- Apply setter to each group
+    for name, group in pairs(groups) do
+        setter(name, group)
+    end
+end
 
 return M
 

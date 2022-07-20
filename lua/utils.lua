@@ -33,15 +33,16 @@ M.add_plugins = function(plugins, configs, packer)
 end
 
 -- -----------------------------
-M._set_options = function(_, options)
+SETTERS = {}
+SETTERS.options = function(_, options)
     for k, v in pairs(options) do vim.opt[k] = v end
 end
 
-M._set_functions = function(_, functions)
+SETTERS.functions = function(_, functions)
     for name, func in pairs(functions) do _G.name = func end
 end
 
-M._set_autocommands = function(name, autocommands)
+SETTERS.autocommands = function(name, autocommands)
     local id = vim.api.nvim_create_augroup(name, {clear = true})
     for _, autocmd in pairs(autocommands) do
         vim.api.nvim_create_autocmd(
@@ -55,7 +56,7 @@ M._set_autocommands = function(name, autocommands)
     end
 end
 
-M._set_commands = function(_, commands)
+SETTERS.commands = function(_, commands)
     for name, command in pairs(commands) do
         if (type(command) == 'table') then
             local opts = vim.tbl_extend('force', DEFAULT_CMD_OPTS, command[2])
@@ -74,7 +75,7 @@ M._set_commands = function(_, commands)
     end
 end
 
-M._set_mappings = function(_, mappings)
+SETTERS.mappings = function(_, mappings)
     for mode, mode_mappings in pairs(mappings) do
         for keys, mapping in pairs(mode_mappings) do
             if (type(mapping) == "table") then
@@ -86,14 +87,6 @@ M._set_mappings = function(_, mappings)
         end
     end
 end
-
-SETTERS = {
-    options = M._set_options,
-    functions = M._set_functions,
-    autocommands = M._set_autocommands,
-    commands = M._set_commands,
-    mappings = M._set_mappings,
-}
 
 M.load = function(mode, groups)
     -- setter should be a function

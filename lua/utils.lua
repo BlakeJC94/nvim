@@ -18,79 +18,8 @@ DISABLED_BUILT_INS = {
 }
 
 DEFAULT_MAP_OPTS = {noremap = true, silent = true}
+DEFAULT_CMD_OPTS = {force = true}
 
-M.arrow_maps = {
-    [''] = {
-        -- Disable arrow keys
-        ['<Left>']  = '',
-        ['<Down>']  = '',
-        ['<Up>']    = '',
-        ['<Right>'] = '',
-        -- ['<C-Left>']  = '',
-        -- ['<C-Down>']  = '',
-        -- ['<C-Up>']    = '',
-        -- ['<C-Right>'] = '',
-        -- ['<S-Left>']  = '',
-        -- ['<S-Down>']  = '',
-        -- ['<S-Up>']    = '',
-        -- ['<S-Right>'] = '',
-        -- -- [Leader + Arrow] to navigate windows
-        -- ['<C-Left>']  = ':wincmd h<CR>',
-        -- ['<C-Down>']  = ':wincmd j<CR>',
-        -- ['<C-Up>']    = ':wincmd k<CR>',
-        -- ['<C-Right>'] = ':wincmd l<CR>',
-        -- -- [Leader + Ctrl + Arrow] : resize splits
-        -- ['<Leader><C-Left>']  = ':vertical resize -8<CR>',
-        -- ['<Leader><C-Down>']  = ':resize -8<CR>',
-        -- ['<Leader><C-Up>']    = ':resize +8<CR>',
-        -- ['<Leader><C-Right>'] = ':vertical resize +8<CR>',
-        -- -- [Leader Shift + Arrow] Move splits (drop <C-\><C-n> if using vim)
-        -- ['<Leader><S-Left>']  = ':wincmd h | wincmd x<CR>',
-        -- ['<Leader><S-Down>']  = ':wincmd j | wincmd x<CR>',
-        -- ['<Leader><S-Up>']    = ':wincmd k | wincmd x<CR>',
-        -- ['<Leader><S-Right>'] = ':wincmd l | wincmd x<CR>',
-    },
-    c = {
-        -- Make vertical wildmenu controls behave intuitively
-        ['<Down>']  = {
-            map  = [[wildmenumode() ? "\<Right>" : "\<Down>"]],
-            opts = {expr=true, silent=false},
-        },
-        ['<Up>']    = {
-            map  = [[wildmenumode() ? "\<Left>" : "\<Up>"]],
-            opts = {expr=true, silent=false},
-        },
-        ['<Right>'] = {
-            map  = [[wildmenumode() ? "\<Down>" : "\<Right>"]],
-            opts = {expr=true, silent=false},
-        },
-        ['<Left>']  = {
-            map  = [[wildmenumode() ? "\<Up>" : "\<Left>"]],
-            opts = {expr=true, silent=false},
-        },
-    },
-}
-
-M.insert_undo_maps = {
-    i = {
-        -- Insert undo breakpoints when typing punctuation
-        [','] = ',<C-g>u',
-        ['.'] = '.<C-g>u',
-        ['!'] = '!<C-g>u',
-        ['?'] = '?<C-g>u',
-        ['('] = '(<C-g>u',
-        [')'] = ')<C-g>u',
-        ['['] = '[<C-g>u',
-        [']'] = ']<C-g>u',
-        ['{'] = '{<C-g>u',
-        ['}'] = '}<C-g>u',
-        ['<'] = '<<C-g>u',
-        ['>'] = '><C-g>u',
-        ["'"] = "'<C-g>u",
-        ['"'] = '"<C-g>u',
-        ['`'] = '`<C-g>u',
-    },
-}
 
 M.setup_packer = function()
     local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -100,15 +29,6 @@ M.setup_packer = function()
         install_cmd = table.concat({'!git clone', packer_url, install_path}, ' ')
         vim.fn.execute(install_cmd)
     end
-
-    -- Update plugins after saving changes to plugins.lua
-    vim.api.nvim_exec([[
-        augroup Packer
-            autocmd!
-            autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-            autocmd BufWritePost configs.lua source <afile> | PackerCompile
-        augroup end
-    ]], false)
 
     -- Add packer to managed plugins
     vim.cmd("packadd packer.nvim")
@@ -120,34 +40,201 @@ M.disable_built_ins = function()
     end
 end
 
-M.set_mapping_group = function(mapping_group)
-    for mode, mappings in pairs(mapping_group) do
-        for keys, mapping in pairs(mappings) do
-            if (type(mapping) == "table") then
-                local opts = vim.tbl_extend('force', DEFAULT_MAP_OPTS, mapping.opts)
-                vim.api.nvim_set_keymap(mode, keys, mapping.map, opts)
-            else
-                vim.api.nvim_set_keymap(mode, keys, mapping, DEFAULT_MAP_OPTS)
+
+-- M._set_augroup = function(name, augroup)
+--     local id = vim.api.nvim_create_augroup(name, {clear = true})
+--     for _name, autocmd in pairs(augroup) do
+--         local events = autocmd[1]
+--         local cmd = autocmd[2]
+--         vim.api.nvim_create_autocmd(
+--             events,
+--             {
+--                 group = id,
+--                 pattern = cmd.pattern,
+--                 callback = cmd.callback,
+--             }
+--         )
+--     end
+-- end
+
+
+M._parse_table_vargs = function(...)
+    local args = {...}
+    if #args == 0 then return nil end
+    -- if type(args) == 'table' and
+
+    -- Is the input just one table? If so, return the input
+    -- if #args == 1 and type(args[1][next(args[1])]) == 'table' then
+    -- if #args == 1 then
+    --     local single_arg = args[next(args)]
+    --     print("PARSE----")
+    --     print("  type of single_arg", type(single_arg))
+    --     print("  len of single_arg", #single_arg)
+    --     -- print(vim.inspect(single_arg))
+
+
+
+    --     local first_arg = args[1][next(args[1])]
+    --     print(vim.inspect(first_arg))
+    --     return args[1]
+    -- end
+
+
+    local groups = {}
+    local index = 0
+    for i = 1, #args do
+        if type(args[i]) ~= 'table' or type(next(args[i])) then
+            index = index + 1
+            groups[index] = args[i]
+        end
+    end
+
+    return groups
+end
+
+-- M.load = function(setter, ...)
+--     groups = require('utils')._parse_table_vargs(...)
+--     if not groups then return end
+--     for key, values in pairs(groups) do
+--         setter(key, values)
+--     end
+-- end
+
+M.load_options = function(...)
+    groups = require('utils')._parse_table_vargs(...)
+    if not groups then return end
+    for _i, options in ipairs(groups) do
+        require('utils')._set_options(_i, options)
+    end
+end
+
+M.load_mappings = function(...)
+    groups = require('utils')._parse_table_vargs(...)
+    if not groups then return end
+    for _i, mappings in ipairs(groups) do
+        utils._set_mappings(mappings)
+    end
+end
+
+M.load_commands = function(...)
+    groups = require('utils')._parse_table_vargs(...)
+    if not groups then return end
+    for _i, commands in ipairs(groups) do
+        utils._set_commands(commands)
+    end
+end
+
+-- TODO write docs explaining that this input should just be one table
+M.load_functions = function(...)
+    groups = require('utils')._parse_table_vargs(...)
+    if not groups then return end
+    for _i, group in ipairs(groups) do
+        for name, func in pairs(group) do
+            _G.name = func
+        end
+    end
+end
+
+-- TODO write docs explaining that this input should just be one table
+M.load_autocommands = function(...)
+    groups = require('utils')._parse_table_vargs(...)
+    if not groups then return end
+    for _i, group in ipairs(groups) do
+        for name, augroup in pairs(group) do
+
+            local id = vim.api.nvim_create_augroup(name, {clear = true})
+            for _name, autocmd in pairs(augroup) do
+                local events = autocmd[1]
+                local cmd = autocmd[2]
+                vim.api.nvim_create_autocmd(
+                    events,
+                    {
+                        group = id,
+                        pattern = cmd.pattern,
+                        callback = cmd.callback,
+                    }
+                )
             end
         end
     end
 end
 
-M.my_fold_text = function()
-    local line = vim.fn.getline(vim.v.foldstart)
+-- -----------------------------
+M.load = function(setter, groups)
+    -- setter should be a function
+    if type(setter) ~= "function" then return end
 
-    local indent_str = string.rep(" ", vim.fn.indent(vim.v.foldstart - 1))
-    local fold_str = indent_str .. line .. string.rep(" ", 100)
+    -- `groups` should be a table of tables
+    -- groups = {group_name: {setter_args}}
+    if type(groups) ~= "table" then return end
+    for _k, v in pairs(groups) do
+        if type(v) ~= "table" then return end
+    end
 
-    local fold_size = vim.v.foldend - vim.v.foldstart + 1
-    local fold_size_str = " (" .. fold_size .. ") "
-
-    return string.sub(fold_str, 0, 100 - #fold_size_str) .. fold_size_str
+    -- Apply setter to each group
+    for name, group in pairs(groups) do
+        setter(name, group)
+    end
 end
 
-M.replace_keycodes = function()
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
+M._set_options = function(_, options)
+    for k, v in pairs(options) do vim.opt[k] = v end
 end
+
+M._set_functions = function(_, functions)
+    for name, func in pairs(functions) do _G.name = func end
+end
+
+M._set_autocommands = function(name, autocommands)
+    local id = vim.api.nvim_create_augroup(name, {clear = true})
+    for _, autocmd in pairs(autocommands) do
+        vim.api.nvim_create_autocmd(
+            autocmd.events,
+            {
+                group = id,
+                pattern = autocmd.pattern,
+                callback = autocmd.callback,
+            }
+        )
+    end
+end
+
+M._set_commands = function(_, commands)
+    for name, command in pairs(commands) do
+        if (type(command) == 'table') then
+            local opts = vim.tbl_extend('force', DEFAULT_CMD_OPTS, command[2])
+            vim.api.nvim_create_user_command(
+                name,
+                command[1],
+                opts
+            )
+        else
+            vim.api.nvim_create_user_command(
+                name,
+                command,
+                DEFAULT_CMD_OPTS
+            )
+        end
+    end
+end
+
+M._set_mappings = function(_, mappings)
+    for mode, mode_mappings in pairs(mappings) do
+        for keys, mapping in pairs(mode_mappings) do
+            if (type(mapping) == "table") then
+                local opts = vim.tbl_extend('force', DEFAULT_MAP_OPTS, mapping.opts)
+                vim.keymap.set(mode, keys, mapping.map, opts)
+            else
+                vim.keymap.set(mode, keys, mapping, DEFAULT_MAP_OPTS)
+            end
+        end
+    end
+end
+
+-- TODO
+-- M._set_plugins = function(name, plugins)
+-- end
+
 
 return M
 

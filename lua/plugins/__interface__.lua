@@ -5,20 +5,29 @@ M = {}
 M["ellisonleao/gruvbox.nvim"] = {
     requires = {"rktjmp/lush.nvim"},
     config = function()
-        vim.cmd [[
-            augroup gruvbox_overrides
-                autocmd!
-                autocmd ColorScheme * hi Folded guibg='#282828'
-                autocmd ColorScheme * hi ColorColumn guibg='#282828'
-                autocmd ColorScheme * hi CursorLine guibg='#282828'
-                autocmd ColorScheme * hi CursorLineNr guibg='#282828'
-            augroup END
-        ]]
-        vim.g.gruvbox_italic            = 1
-        vim.g.gruvbox_contrast_dark     = 'hard'
-        vim.g.gruvbox_italicize_strings = 1
-        vim.cmd [[colorscheme gruvbox]]
-        vim.cmd("highlight IndentBlanklineContextChar guifg=#a89984 gui=nocombine")
+        vim.o.background = "dark"
+        require("gruvbox").setup({
+            undercurl = true,
+            underline = true,
+            bold = true,
+            italic = true, -- will make italic comments and special strings
+            invert_selection = false,
+            invert_signs = false,
+            invert_tabline = false,
+            invert_intend_guides = false,
+            contrast = "hard", -- can be "hard" or "soft"
+            overrides = {
+                Folded = {bg = "#282828"},
+                ColorColumn = {bg = "#282828"},
+                CursorLine = {bg = "#282828"},
+                CursorLineNr = {bg = "#282828"},
+                IndentBlanklineContextChar = {fg = "#a89984"},
+                Search = {fg = "#fabd2f", bg = "#282828"},
+                CurSearch = {bg = "#fabd2f", fg = "#282828"},
+                IncSearch = {fg = "#fabd2f", bg = "#282828"},
+            },
+        })
+        vim.cmd("colorscheme gruvbox")
     end,
 }
 

@@ -13,6 +13,33 @@ M['tpope/vim-commentary'] = {}
 -- crs => coerce cursor word to snake_case. :Subvert => Case invariant substitution
 M['tpope/vim-abolish'] = {}
 
+-- gs<object> ==> Sort operator across object
+M['christoomey/vim-sort-motion'] = {}
+
+-- Better .-repreat actions for visual mode
+M['inkarkat/vim-visualrepeat'] = {}
+
+-- ["x]gr<motion> ==> Replace motion region with register x
+M['inkarkat/vim-ReplaceWithRegister'] = {
+    requires = {"inkarkat/vim-ingo-library"},
+}
+
+-- Minimal autopairs (maybe this one will be alright?)
+M['kana/vim-smartinput'] = {}
+
+-- ae/ie ==> Text objects for around/in everything in file
+M['kana/vim-textobj-entire'] = {}
+
+-- I/A commands for regular visual mode DOESNT WORK :(
+-- M['kana/vim-niceblock'] = {}
+
+-- Star operator for visual mode, search current selections
+M['thinca/vim-visualstar'] = {
+    config = function()
+        vim.g['visualstar_extra_commands'] = 'zzzv'
+    end
+}
+
 -- Extra motions (e.g. ]q [q to navigate quickfix list)
 -- M['tpope/vim-unimpaired'] = {}
 

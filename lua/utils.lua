@@ -40,123 +40,20 @@ M.disable_built_ins = function()
     end
 end
 
-
--- M._set_augroup = function(name, augroup)
---     local id = vim.api.nvim_create_augroup(name, {clear = true})
---     for _name, autocmd in pairs(augroup) do
---         local events = autocmd[1]
---         local cmd = autocmd[2]
---         vim.api.nvim_create_autocmd(
---             events,
---             {
---                 group = id,
---                 pattern = cmd.pattern,
---                 callback = cmd.callback,
---             }
---         )
---     end
--- end
-
-
-M._parse_table_vargs = function(...)
-    local args = {...}
-    if #args == 0 then return nil end
-    -- if type(args) == 'table' and
-
-    -- Is the input just one table? If so, return the input
-    -- if #args == 1 and type(args[1][next(args[1])]) == 'table' then
-    -- if #args == 1 then
-    --     local single_arg = args[next(args)]
-    --     print("PARSE----")
-    --     print("  type of single_arg", type(single_arg))
-    --     print("  len of single_arg", #single_arg)
-    --     -- print(vim.inspect(single_arg))
-
-
-
-    --     local first_arg = args[1][next(args[1])]
-    --     print(vim.inspect(first_arg))
-    --     return args[1]
-    -- end
-
-
-    local groups = {}
-    local index = 0
-    for i = 1, #args do
-        if type(args[i]) ~= 'table' or type(next(args[i])) then
-            index = index + 1
-            groups[index] = args[i]
-        end
-    end
-
-    return groups
-end
-
--- M.load = function(setter, ...)
---     groups = require('utils')._parse_table_vargs(...)
---     if not groups then return end
---     for key, values in pairs(groups) do
---         setter(key, values)
---     end
--- end
-
-M.load_options = function(...)
-    groups = require('utils')._parse_table_vargs(...)
-    if not groups then return end
-    for _i, options in ipairs(groups) do
-        require('utils')._set_options(_i, options)
-    end
-end
-
-M.load_mappings = function(...)
-    groups = require('utils')._parse_table_vargs(...)
-    if not groups then return end
-    for _i, mappings in ipairs(groups) do
-        utils._set_mappings(mappings)
-    end
-end
-
-M.load_commands = function(...)
-    groups = require('utils')._parse_table_vargs(...)
-    if not groups then return end
-    for _i, commands in ipairs(groups) do
-        utils._set_commands(commands)
-    end
-end
-
--- TODO write docs explaining that this input should just be one table
-M.load_functions = function(...)
-    groups = require('utils')._parse_table_vargs(...)
-    if not groups then return end
-    for _i, group in ipairs(groups) do
-        for name, func in pairs(group) do
-            _G.name = func
-        end
-    end
-end
-
--- TODO write docs explaining that this input should just be one table
-M.load_autocommands = function(...)
-    groups = require('utils')._parse_table_vargs(...)
-    if not groups then return end
-    for _i, group in ipairs(groups) do
-        for name, augroup in pairs(group) do
-
-            local id = vim.api.nvim_create_augroup(name, {clear = true})
-            for _name, autocmd in pairs(augroup) do
-                local events = autocmd[1]
-                local cmd = autocmd[2]
-                vim.api.nvim_create_autocmd(
-                    events,
-                    {
-                        group = id,
-                        pattern = cmd.pattern,
-                        callback = cmd.callback,
-                    }
-                )
+M.add_plugins = function(plugins, configs, packer)
+    packer.init()
+    packer.reset()
+    packer.use({'wbthomason/packer.nvim'})
+    for _name, repos in pairs(plugins) do
+        for _, repo in pairs(repos) do
+            local repo_config = {repo}
+            if configs[repo] ~= nil then
+                repo_config = vim.tbl_extend("force", repo_config, configs[repo])
             end
+            packer.use(repo_config)
         end
     end
+    packer.install()
 end
 
 -- -----------------------------

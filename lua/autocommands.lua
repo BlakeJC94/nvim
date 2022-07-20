@@ -105,19 +105,19 @@ M.FT_EXTRA = {
 }
 
 -- TODO update these targets after refactor
-M.PACKER_COMPILE = {
-    -- compile on plugins lua write
-    {
-        events = {"BufWritePost"},
-        pattern = "plugins.lua",
-        callback = function(keys) vim.cmd('source ' .. keys.file .. ' | PackerCompile') end
-    },
-    -- compile on configs lua write
-    {
-        events = {"BufWritePost"},
-        pattern = "configs.lua",
-        callback = function(keys) vim.cmd('source ' .. keys.file .. ' | PackerCompile') end
-    },
-}
+-- M.PACKER_COMPILE = {
+--     -- compile on plugins lua write
+--     {
+--         events = {"BufWritePost"},
+--         pattern = "plugins.lua",
+--         callback = function(keys) vim.cmd('source ' .. keys.file .. ' | PackerCompile') end
+--     },
+--     -- compile on configs lua write
+--     {
+--         events = {"BufWritePost"},
+--         pattern = "configs.lua",
+--         callback = function(keys) vim.cmd('source ' .. keys.file .. ' | PackerCompile') end
+--     },
+-- }
 
 return M
